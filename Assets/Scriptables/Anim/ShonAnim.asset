@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2a206276f831342a4698c2b77314a7, type: 3}
+  m_Name: ShonAnim
+  m_EditorClassIdentifier: 
+  idle: {fileID: 11400000, guid: f96cf508259dc944a8fad0445b5fd803, type: 2}
+  run: {fileID: 11400000, guid: 3944e29a03bae69488b40f85393e58df, type: 2}
+  crouch: {fileID: 11400000, guid: cdcb63768619dce48ad0fd30e79c992f, type: 2}
+  attackStand: {fileID: 11400000, guid: 8ed4648f126c76e46b8113f7a481be65, type: 2}
+  attackCrouch: {fileID: 11400000, guid: ae19c93ce2e921440a5dd465aaf76f98, type: 2}
+  jumpStart: {fileID: 11400000, guid: 9ce7af1b95b3218498a3519bdf966152, type: 2}
+  jumpIdle: {fileID: 11400000, guid: 673b4dddce68ab84795dbb039c30501e, type: 2}
+  jumpAirJump: {fileID: 11400000, guid: 9ef9b546cf7f56e44a74b9704d7a64b1, type: 2}
+  jumpLanding: {fileID: 11400000, guid: a408159b59155784daddda9cc3edb67c, type: 2}
+  jumpLand: {fileID: 11400000, guid: 2fc445fbc05934c4cb8e90df4ea59ac1, type: 2}
