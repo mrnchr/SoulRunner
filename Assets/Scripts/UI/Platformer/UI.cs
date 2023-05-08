@@ -72,7 +72,6 @@ namespace SR.Platformer
         }
 
         private void hpChangedHandler(byte ind, float perc) {
-            Debug.Log("hp change: " + perc);
             _hpMask.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, perc * (_maxHpWidth) + _minHpWidth); 
         }
 

@@ -30,7 +30,6 @@ namespace SR
         }
 
         public bool place(InventoryItem item) {
-            Debug.Log((byte)type + "_" + item.itemData.type);
             if ((byte)type != item.itemData.type) {
                 return false;
             }

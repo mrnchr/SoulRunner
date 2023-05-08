@@ -32,6 +32,5 @@ public class EnemyBase : MonoBehaviour
         } else {
             _collider.enabled = false;
         }
-        //Debug.Log(_trackEntry.AnimationTime);
     }
 }

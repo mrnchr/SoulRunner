@@ -33,7 +33,6 @@ namespace SR
         public void load() {
 
             ObscuredString userInventoryStr = ObscuredPrefs.Get("user_inventory", "{}");
-            UnityEngine.Debug.Log(userInventoryStr);
             InventorySave invSave = JsonConvert.DeserializeObject<InventorySave>(userInventoryStr);
             if (invSave.items == null) {
                 _items = new List<UserItem>();
@@ -52,16 +51,11 @@ namespace SR
             if (useItemsSave.id != null) {
                 _useItems = useItemsSave.id;
             }
-            for (int i = 0; i < _useItems.Length; i++) {
-                UnityEngine.Debug.Log("use items: " + _useItems[i]);
-            }
         }
 
         public void save() {
             InventorySave invSave = new InventorySave();
             invSave.items = _items.ToArray();
-            UnityEngine.Debug.Log(JsonConvert.SerializeObject(invSave));
-
             ObscuredPrefs.Set("user_inventory", JsonConvert.SerializeObject(invSave));
         }
 
@@ -72,9 +66,7 @@ namespace SR
         }
 
         public void useSelectedItem() {
-            UnityEngine.Debug.Log("use item");
             if (_useItems[_selectedSlot] != 0) {
-                UnityEngine.Debug.Log("use item!!");
                 UserItem userItem = getUseItems()[_selectedSlot];
                 if (userItem.id == 1) {
                     User.heal(30);
@@ -179,10 +171,10 @@ namespace SR
                 remove(item2);
                 save();
                 Crafting.instance.loadInventory();
-                UnityEngine.Debug.Log("successfully crafted item");
+                
                 return true;
             } else {
-                UnityEngine.Debug.Log("no free space");
+                
             }
             return false;
         }

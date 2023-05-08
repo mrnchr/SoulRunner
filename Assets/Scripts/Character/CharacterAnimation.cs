@@ -132,7 +132,6 @@ namespace SR.Character
                 }
                 _moveVector = value;
                 if (_moveVector.x != 0 && _tween1 != null) {
-                    Debug.Log("cancel tween");
                     LeanTween.cancel(_tween1.id);
                     _tween1 = null;
                     _isWalkAnimSwitching = false;
@@ -248,15 +247,8 @@ namespace SR.Character
         }
 
         private void startMove() {
-            Debug.Log(_moveVector.x + "_" + _prevMoveVector.x);
             if (_moveVector.x == _prevMoveVector.x * -1) {
-                //onRunSwitchAnimEvent?.Invoke(true);
-                Debug.Log("CHANGE MOVE DIRECTION");
-                //_isWalkAnimSwitching = true;
                 _activeSkeleton.state.SetAnimation(0, _charController.isKelli ? _kelliAnim.run : _shonAnim.run, true);
-                //_activeSkeleton.state.SetEmptyAnimation(1, 0);
-                //TrackEntry trackEntry = _activeSkeleton.state.AddAnimation(1, _charController.isKelli ? _kelliAnim.runSwitch : _shonAnim.run, false, 0);
-                //trackEntry.Complete += switchAnimCompleteHandler;
                 
             } else {
                 _activeSkeleton.state.SetAnimation(0, _charController.isKelli ? _kelliAnim.run : _shonAnim.run, true);
@@ -265,9 +257,8 @@ namespace SR.Character
         }
 
         private void stopMove() {
-            Debug.Log("stop move");
             _activeSkeleton.state.SetAnimation(0, _charController.isKelli ? _kelliAnim.idle : _shonAnim.idle, true);
-            _tween1 = LeanTween.delayedCall(0.3f, () => { Debug.Log("sdf"); _tween1 = null; _moveVector.x = 0; onRunSwitchAnimEvent?.Invoke(false); _isWalkAnimSwitching = false; _prevMoveVector.x = 0; });
+            _tween1 = LeanTween.delayedCall(0.3f, () => { _tween1 = null; _moveVector.x = 0; onRunSwitchAnimEvent?.Invoke(false); _isWalkAnimSwitching = false; _prevMoveVector.x = 0; });
             _walkAnim = false;
         }
 
@@ -336,7 +327,6 @@ namespace SR.Character
         }
 
         private void shootLeftHand() {
-            Debug.Log("shoot left hand");
             _activeSkeleton.state.SetEmptyAnimation(1, 0.2f);
             TrackEntry track = _activeSkeleton.state.AddAnimation(1, _kelliAnim.fireLeftHand, false, 0);
             _shootLT = LeanTween.delayedCall(0.3f / _activeSkeleton.timeScale, () => { onFireAnimStartEvent?.Invoke(_leftHandSpawn.transform); });
@@ -345,7 +335,6 @@ namespace SR.Character
         }
 
         private void shootRightHand() {
-            Debug.Log("shoot right hand");
             _activeSkeleton.state.SetEmptyAnimation(1, 0.2f);
             TrackEntry track = _activeSkeleton.state.AddAnimation(1, _kelliAnim.fireRightHand, false, 0);
             _shootLT = LeanTween.delayedCall(0.3f / _activeSkeleton.timeScale, () => { onFireAnimStartEvent?.Invoke(_rightHandSpawn.transform);  });
@@ -353,7 +342,6 @@ namespace SR.Character
         }
 
         private void shootWall() {
-            Debug.Log("shoot wall");
             _activeSkeleton.state.SetEmptyAnimation(1, 0.2f);
             TrackEntry track = _activeSkeleton.state.AddAnimation(1, _kelliAnim.fireWall, false, 0);
             _shootLT = LeanTween.delayedCall(0.3f / _activeSkeleton.timeScale, () => { onFireAnimStartEvent?.Invoke(_rightHandSpawn.transform); });
@@ -361,7 +349,6 @@ namespace SR.Character
         }
 
         private void shootComplete(TrackEntry trackEntry) {
-            Debug.Log("shoot complete handler");
             _shootLT = null;
             onFireAnimEndEvent?.Invoke();
             _fire1 = false;
@@ -374,7 +361,6 @@ namespace SR.Character
             _isJumpAttack = false;
             onJumpAttackEndEvent?.Invoke();
             trackEntry.Complete -= jumpAttackFinish;
-            Debug.Log("jump attack end");
         }
 
         private void switchAnimCompleteHandler(TrackEntry trackEntry) {

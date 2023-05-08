@@ -268,7 +268,6 @@ namespace SR.Character
                 _anim.isJumpAttack = true;
             }
             if (player.GetButtonDown("SwapChar") && !_isDashing) {
-                Debug.Log("swap char");
                 isKelli = !isKelli;
             }
             
@@ -287,9 +286,7 @@ namespace SR.Character
             if (_isDead) {
                 return;
             }
-            Debug.Log("?");
             if (collision.CompareTag("Collectable")) {
-                Debug.Log("Collectable");
                 collision.gameObject.GetComponent<Collectable>().collect();
             } else if (collision.CompareTag("Enemy")) {
                 User.damage(10);
@@ -370,12 +367,10 @@ namespace SR.Character
         }
 
         private void groundTriggerEnterHandler() {
-            Debug.Log("ground trigger enter");
             isJumping = false;
         }
 
         private void groundTriggerExitHandler() {
-            Debug.Log("ground trigger exit");
             if (!_isJumping || !_isJumpAttacking) {
                 isJumping = true;
             }
@@ -383,7 +378,6 @@ namespace SR.Character
 
         private void ledgeTriggerEnterHandler(Transform colliderTransform) {
             
-            Debug.Log("ledge trigger enter: " + _ledgeChecker.transform.localPosition.x + "_" + _ledgeChecker.transform.localPosition.y);
             isHanging = true;
             transform.position = new Vector3(colliderTransform.position.x - _ledgeChecker.transform.localPosition.x * (transform.localScale.x), transform.position.y);
         }

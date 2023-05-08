@@ -98,7 +98,6 @@ namespace SR
                 if (!_slot.isWarehouse) {
                     _slot.clear();
                     if (_slot.type == ItemType.Potion) {
-                        Debug.Log("update use items");
                         Crafting.instance.updateUseItems();
                     }
                 }
@@ -111,13 +110,11 @@ namespace SR
         }
 
         public void OnPointerUp(PointerEventData eventData) {
-            Debug.Log("pointer up");
             if (_slot.isWarehouse) {
                 Crafting.instance.place(this);
             } else {
                 _slot.clear();
                 if (_slot.type == ItemType.Potion) {
-                    Debug.Log("update use items");
                     Crafting.instance.updateUseItems();
                 }
                 _slot = null;

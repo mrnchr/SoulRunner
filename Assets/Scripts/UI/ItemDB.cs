@@ -32,7 +32,6 @@ public class ItemDB
 
     public static void getItemData(int id, byte type) {
         if (_busy) {
-            Debug.Log("add to queue: " + id + "_" + type);
             _queue.Enqueue(new QueueData() { id = id, type = type });
             return;
         }
@@ -56,17 +55,12 @@ public class ItemDB
         _busy = true;
         _objectOperation = Addressables.LoadAssetAsync<InventoryItemScr>(string.Concat("Inventory/Item", key));
         _objectOperation.Completed += objectLoadDone;
-        Debug.Log("key: " + string.Concat("Inventory/Item", key));
-        //await _objectOperation.Task;
-        Debug.Log("??");
 
     }
 
     private static void objectLoadDone(AsyncOperationHandle<InventoryItemScr> obj) {
         _objectOperation.Completed -= objectLoadDone;
-        Debug.Log("object load done");
         if (_objectOperation.Status == AsyncOperationStatus.Succeeded) {
-            Debug.Log("???");
             InventoryItemScr itemData = _objectOperation.Result;
             Type typeClass = itemData.GetType();
             byte type = 0;
@@ -76,7 +70,6 @@ public class ItemDB
                 type = 2;
             }
             string key = type.ToString() + "_" + itemData.id.ToString();
-            Debug.Log("itemData: " + itemData.name);
             if (!_loadedItemsData.ContainsKey(key)) {
                 _loadedItemsData.Add(key, itemData);
             }
@@ -85,7 +78,6 @@ public class ItemDB
             if (_queue.Count > 0) {
                
                 QueueData nextItem = _queue.Dequeue();
-                Debug.Log("queue get next: " + nextItem.id + "_" + nextItem.type);
                 prepareLoading(nextItem.id, nextItem.type);
             }
         }

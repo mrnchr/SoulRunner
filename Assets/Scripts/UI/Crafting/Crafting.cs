@@ -182,7 +182,6 @@ namespace SR
         }
 
         public void craftBtnClick() {
-            Debug.Log(_craftSlot[0].isEmpty + "_" + _craftSlot[1].isEmpty);
             if (_craftSlot[0].isEmpty || _craftSlot[1].isEmpty) {
                 return;
             }
