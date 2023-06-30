@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.esotericsoftware.spine.urp-shaders": {
-      "version": "file:D:/Work/Soul Runner/com.esotericsoftware.spine.urp-shaders-3.8-2019.3",
+      "version": "file:C:/Users/Михаил/Downloads/com.esotericsoftware.spine.urp-shaders-3.8-Unity2019.3-2021-03-04/com.esotericsoftware.spine.urp-shaders-3.8-2019.3",
       "depth": 0,
       "source": "local",
       "dependencies": {
@@ -118,7 +118,7 @@
     },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -136,6 +136,15 @@
         "com.unity.2d.tilemap": "1.0.0",
         "com.unity.2d.tilemap.extras": "2.2.1"
       }
+    },
+    "com.unity.ide.rider": {
+      "version": "3.0.24",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ext.nunit": "1.0.6"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
       "version": "2.0.16",
