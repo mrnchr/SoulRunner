@@ -1,0 +1,23 @@
+===> [Launcher updating] process STARTED! <===
+Update context initializing...
+Software version: 2.6.3
+Software tier: basic
+Update context points to [REDACTED]
+Downloader in use: [MHLab.Patch.Core.Client.IO.FileDownloader]
+No current version found. A full repair may be required.
+Workspace cleaned. Removed 0 files
+Cannot retrieve any new version...
+Collected information on 189 local files.
+===> [Launcher updating] process FAILED! <=== - One or more errors occurred. (Exception of type 'MHLab.Patch.Core.Client.Exceptions.NoAvailableBuildsException' was thrown.) -   at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks, System.Int32 millisecondsTimeout, System.Threading.CancellationToken cancellationToken) [0x001c8] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks, System.Int32 millisecondsTimeout) [0x00000] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks) [0x00000] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.FetchIndexes () [0x0003d] in <3acd931ddd554fa2a5ac573bdffb7002>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.Initialize () [0x0015a] in <3acd931ddd554fa2a5ac573bdffb7002>:0 
+  at MHLab.Patch.Launcher.Scripts.LauncherBase.StartUpdateProcess () [0x000d5] in <3922da119a2c419cb38bd7dea40cb338>:0 
+One or more errors occurred. (Exception of type 'MHLab.Patch.Core.Client.Exceptions.NoAvailableBuildsException' was thrown.)
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks, System.Int32 millisecondsTimeout, System.Threading.CancellationToken cancellationToken) [0x001c8] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks, System.Int32 millisecondsTimeout) [0x00000] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks) [0x00000] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.FetchIndexes () [0x0003d] in <3acd931ddd554fa2a5ac573bdffb7002>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.Initialize () [0x0015a] in <3acd931ddd554fa2a5ac573bdffb7002>:0 
+  at MHLab.Patch.Launcher.Scripts.LauncherBase.StartUpdateProcess () [0x000d5] in <3922da119a2c419cb38bd7dea40cb338>:0 

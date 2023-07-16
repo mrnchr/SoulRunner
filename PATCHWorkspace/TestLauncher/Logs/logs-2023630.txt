@@ -1,0 +1,24 @@
+[6/30/2023 12:14:02 PM] [INF] [LauncherBase.cs::StartUpdateProcess@121] ===> [Launcher updating] process STARTED! <===
+[6/30/2023 12:14:03 PM] [INF] [UpdatingContext.cs::Initialize@74] Update context initializing...
+[6/30/2023 12:14:03 PM] [INF] [UpdatingContext.cs::Initialize@75] Software version: 2.6.3
+[6/30/2023 12:14:03 PM] [INF] [UpdatingContext.cs::Initialize@76] Software tier: basic
+[6/30/2023 12:14:03 PM] [INF] [UpdatingContext.cs::Initialize@78] Update context points to https://sevas.site/SoulRunner/Patch
+[6/30/2023 12:14:03 PM] [INF] [UpdatingContext.cs::Initialize@79] Downloader in use: [MHLab.Patch.Core.Client.IO.FileDownloader]
+[6/30/2023 12:14:03 PM] [DBG] [UpdatingContext.cs::Initialize@80] ===> Debug Mode: ENABLED <===
+[6/30/2023 12:14:03 PM] [WRN] [UpdatingContext.cs::SetCurrentVersion@175] No current version found. A full repair may be required.
+[6/30/2023 12:14:03 PM] [INF] [UpdatingContext.cs::Initialize@87] Workspace cleaned. Removed 0 files
+[6/30/2023 12:14:03 PM] [ERR] [UpdatingContext.cs::GetBuildDefinition@298] Cannot retrieve any new version...
+[6/30/2023 12:14:03 PM] [INF] [UpdatingContext.cs::GetLocalFiles@283] Collected information on 1 local files.
+[6/30/2023 12:14:03 PM] [ERR] [LauncherUpdater.cs::UpdateFailed@142] ===> [Launcher updating] process FAILED! <=== - One or more errors occurred. (Exception of type 'MHLab.Patch.Core.Client.Exceptions.NoAvailableBuildsException' was thrown.) -   at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks, System.Int32 millisecondsTimeout, System.Threading.CancellationToken cancellationToken) [0x001c8] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks, System.Int32 millisecondsTimeout) [0x00000] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks) [0x00000] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.FetchIndexes () [0x0003d] in <3acd931ddd554fa2a5ac573bdffb7002>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.Initialize () [0x0015a] in <3acd931ddd554fa2a5ac573bdffb7002>:0 
+  at MHLab.Patch.Launcher.Scripts.LauncherBase.StartUpdateProcess () [0x000d5] in C:\DevelopingGames\Unity\SoulRunner\SoulRunner\Assets\3rdParty\MHLab\Patch\Launcher\Scripts\LauncherBase.cs:155 
+One or more errors occurred. (Exception of type 'MHLab.Patch.Core.Client.Exceptions.NoAvailableBuildsException' was thrown.)
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks, System.Int32 millisecondsTimeout, System.Threading.CancellationToken cancellationToken) [0x001c8] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks, System.Int32 millisecondsTimeout) [0x00000] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at System.Threading.Tasks.Task.WaitAll (System.Threading.Tasks.Task[] tasks) [0x00000] in <6073cf49ed704e958b8a66d540dea948>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.FetchIndexes () [0x0003d] in <3acd931ddd554fa2a5ac573bdffb7002>:0 
+  at MHLab.Patch.Core.Client.UpdatingContext.Initialize () [0x0015a] in <3acd931ddd554fa2a5ac573bdffb7002>:0 
+  at MHLab.Patch.Launcher.Scripts.LauncherBase.StartUpdateProcess () [0x000d5] in C:\DevelopingGames\Unity\SoulRunner\SoulRunner\Assets\3rdParty\MHLab\Patch\Launcher\Scripts\LauncherBase.cs:155 

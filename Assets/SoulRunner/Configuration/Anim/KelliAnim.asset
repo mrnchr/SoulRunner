@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a7f88d42a8f4b4f85f72ccc8ad97d1, type: 3}
+  m_Name: KelliAnim
+  m_EditorClassIdentifier: 
+  Anims:
+  - Name: 10
+    Asset: {fileID: 11400000, guid: 0e2674385b630b34dbc64d1c994d2f5e, type: 2}
+    IsLoop: 0
+  - Name: 11
+    Asset: {fileID: 11400000, guid: df93004ca6140ee4385aebc0d78678f2, type: 2}
+    IsLoop: 0
+  - Name: 12
+    Asset: {fileID: 11400000, guid: 55da0f983df16ff4f9758ba3acae67cf, type: 2}
+    IsLoop: 0
+  - Name: 13
+    Asset: {fileID: 11400000, guid: 209995545f6f04e4ba0657ff819a4161, type: 2}
+    IsLoop: 0
+  - Name: 14
+    Asset: {fileID: 11400000, guid: 158cb5abf92b9f045a8c316e3f5b052b, type: 2}
+    IsLoop: 0
+  - Name: 7
+    Asset: {fileID: 11400000, guid: ba4374de1a86d7248b5ecccda866416d, type: 2}
+    IsLoop: 0
+  - Name: 8
+    Asset: {fileID: 11400000, guid: ee1be7add773f194a86fa4848050ec40, type: 2}
+    IsLoop: 1
+  - Name: 9
+    Asset: {fileID: 11400000, guid: a0dd11dbc945f1f48b9fa147f98b5db3, type: 2}
+    IsLoop: 0
+  - Name: 3
+    Asset: {fileID: 11400000, guid: 2ffb990420ded7a46852cbf9943f9d3c, type: 2}
+    IsLoop: 0
+  - Name: 4
+    Asset: {fileID: 11400000, guid: 06d0a17a77bfd944694c3745f83bb9a6, type: 2}
+    IsLoop: 0
+  - Name: 0
+    Asset: {fileID: 11400000, guid: 42e12574fe0f87e47b160ea1d60cacaf, type: 2}
+    IsLoop: 1
+  - Name: 1
+    Asset: {fileID: 11400000, guid: 047ab0179d66153409f0c3f69f26cc00, type: 2}
+    IsLoop: 1
+  - Name: 2
+    Asset: {fileID: 11400000, guid: f02c8ad2aaea54043b31f1ae1e8aa5c1, type: 2}
+    IsLoop: 1
+  - Name: 5
+    Asset: {fileID: 11400000, guid: 0456ea493c329fe46bd1283a0b6ccfb2, type: 2}
+    IsLoop: 1
+  - Name: 6
+    Asset: {fileID: 11400000, guid: 4dd0892d03cdc294e9f50934163ca347, type: 2}
+    IsLoop: 0

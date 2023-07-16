@@ -1,4 +1,3 @@
-using SR.Character;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,9 +42,9 @@ namespace SR.Platformer
             UserInventory.onCurrentItemChangeEvent += currentItemChangeHandler;
             User.onHPChangedEvent += hpChangedHandler;
             User.onMPChangedEvent += mpChangedHandler;
-            CharacterControl.onAbility1CDChange += ability1CDChangedHandler;
-            CharacterControl.onAbility2CDChange += ability2CDChangedHandler;
-            CharacterControl.onShootCDChange += shootCDChangedHandler;
+            // CharacterControl.onAbility1CdChange += ability1CDChangedHandler;
+            // CharacterControl.onAbility2CdChange += ability2CDChangedHandler;
+            // CharacterControl.onShootCdChange += shootCDChangedHandler;
 
             _minHpWidth = _hpMaskMin.rect.width;
             _minMpWidth = _mpMaskMin.rect.width;
@@ -55,7 +54,7 @@ namespace SR.Platformer
         }
 
         public void toggleCrafting() {
-            Level.isPaused = !_crafting.activeSelf;
+            LevelObsolete.isPaused = !_crafting.activeSelf;
             _crafting.SetActive(!_crafting.activeSelf);
         
         }
