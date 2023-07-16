@@ -10,19 +10,19 @@ namespace SoulRunner.Player
     public Action<PlayerView> OnPlayerCreated { get; set; }
     
     private readonly DiContainer _container;
-    private readonly PlayerView _playerPrefab;
+    private readonly PlayerView _prefab;
 
     [Inject]
     public PlayerFactory(DiContainer container, PrefabService prefabSvc)
     {
       _container = container;
-      _playerPrefab = prefabSvc.Prefabs.Player;
+      _prefab = prefabSvc.Prefabs.Player;
     }
 
     public PlayerView Create(Vector3 at)
     {
       var player = _container
-        .InstantiatePrefabForComponent<PlayerView>(_playerPrefab, at, Quaternion.identity, null);
+        .InstantiatePrefabForComponent<PlayerView>(_prefab, at, Quaternion.identity, null);
       OnPlayerCreated(player);
       return player;
     }

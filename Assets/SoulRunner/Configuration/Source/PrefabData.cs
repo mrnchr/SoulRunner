@@ -1,6 +1,6 @@
-﻿using SoulRunner.Player;
+﻿using SoulRunner.Fireball;
+using SoulRunner.Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SoulRunner.Configuration
 {
@@ -8,5 +8,6 @@ namespace SoulRunner.Configuration
   public class PrefabData : ScriptableObject
   {
     public PlayerView Player;
+    public FireballView Fireball;
   }
 }

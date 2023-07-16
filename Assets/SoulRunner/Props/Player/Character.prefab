@@ -396,6 +396,8 @@ MonoBehaviour:
   GroundChecker: {fileID: 345630075055785363}
   StayCollider: {fileID: 345630075180562084}
   CrouchCollider: {fileID: 2328029380596182816}
+  RightHand: {fileID: 345630075695392324}
+  LeftHand: {fileID: 345630074562692953}
 --- !u!114 &675583119293948836
 MonoBehaviour:
   m_ObjectHideFlags: 0

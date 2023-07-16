@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 2193438858658110741}
   - component: {fileID: 2193438858658110740}
   - component: {fileID: 2193438858658110743}
-  - component: {fileID: 3596080591960350585}
+  - component: {fileID: 1589592944653372640}
+  - component: {fileID: 8432049811608496233}
   - component: {fileID: -2855665856092347954}
   - component: {fileID: 3344511027585178184}
   m_Layer: 8
-  m_Name: Projectile
+  m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2193438858658110742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.46, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0550d1e33333884e8392030c87a0d1d, type: 2}
+  - {fileID: 2100000, guid: cc8969f6b378a584a88cb7c1b994736d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,7 +125,7 @@ MonoBehaviour:
   _animationName: 
   loop: 0
   timeScale: 1
---- !u!114 &3596080591960350585
+--- !u!114 &1589592944653372640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,12 +134,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 2193438858658110742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43dd4d1b3ea00c8479e62b37562afe17, type: 3}
+  m_Script: {fileID: 11500000, guid: 87422ca156644832b022a76d22968cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawn: {fileID: 11400000, guid: 401595c76e3021b489209bd5e6cb5ca2, type: 2}
-  _idle: {fileID: 11400000, guid: 234a63063d8e7e7419f8df00c38c3f6f, type: 2}
-  _despawn: {fileID: 11400000, guid: d8a16362929057d41bcfd6296e2a8dcf, type: 2}
+  Rb: {fileID: -2855665856092347954}
+  Anim: {fileID: 8432049811608496233}
+--- !u!114 &8432049811608496233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193438858658110742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cffc9bee819647719261f95c92f2aeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skeleton: {fileID: 2193438858658110743}
+  Assets: {fileID: 11400000, guid: 19ea820106f5ddd4796485eacefbfec2, type: 2}
 --- !u!50 &-2855665856092347954
 Rigidbody2D:
   serializedVersion: 4

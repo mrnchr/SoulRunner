@@ -4,9 +4,9 @@ using UnityEngine.Serialization;
 
 namespace SoulRunner.Configuration
 {
-  [CreateAssetMenu(fileName = "Character", menuName = "SR/Character/Character")]
+  [CreateAssetMenu(fileName = "Character", menuName = "SoulRunner/Character/Character")]
   public class HeroSo : ScriptableObject
   {
-    [FormerlySerializedAs("character")] public Hero hero;
+    [FormerlySerializedAs("Hero"),FormerlySerializedAs("hero"),FormerlySerializedAs("character")] public HeroConfig HeroCfg;
   }
 }

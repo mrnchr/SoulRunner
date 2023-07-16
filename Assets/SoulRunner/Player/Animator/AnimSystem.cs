@@ -1,4 +1,5 @@
-﻿using Leopotam.EcsLite;
+﻿using System;
+using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using SoulRunner.Player.Movement;
 using SoulRunner.Utility;
@@ -14,6 +15,7 @@ namespace SoulRunner.Player
     private readonly EcsFilterInject<Inc<InJump, OnGround, PlayerViewRef>> _landing = default;
     private readonly EcsFilterInject<Inc<Crouching, PlayerViewRef>> _crouching = default;
     private readonly EcsFilterInject<Inc<Standing, PlayerViewRef>> _standing = default;
+    private readonly EcsFilterInject<Inc<Firing, PlayerViewRef>> _firing = default;
     private EcsWorld _world;
 
     public void Init(IEcsSystems systems)
@@ -28,6 +30,23 @@ namespace SoulRunner.Player
       AnimateLanding();
       AnimateCrouching();
       AnimateStanding();
+      foreach (int index in _firing.Value)
+      {
+        HandType hand = _world.Get<Firing>(index).Hand;
+        PlayerView view = _world.Get<PlayerViewRef>(index).Value;
+        switch (hand)
+        {
+          case HandType.Left:
+            view.CurrentAnimator.LeftFireTrigger = true;
+            break;
+          case HandType.Right:
+            view.CurrentAnimator.RightFireTrigger = true;
+            break;
+          case HandType.None:
+          default:
+            throw new ArgumentOutOfRangeException();
+        }
+      }
     }
     
     private void AnimateStanding()

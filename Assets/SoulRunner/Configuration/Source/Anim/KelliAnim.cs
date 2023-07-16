@@ -1,8 +1,6 @@
 using SoulRunner.Player;
 using SoulRunner.Utility.Spine;
-using Spine.Unity;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SoulRunner.Configuration.Anim
 {

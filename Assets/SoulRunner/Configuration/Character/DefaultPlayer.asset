@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c89d57ce8514649a9e5f2f1810e8931, type: 3}
   m_Name: DefaultPlayer
   m_EditorClassIdentifier: 
-  hero:
+  HeroCfg:
     MoveSpeed: 7
     JumpForce: 25
+    HoldFireTime: 1
+    FireTime: 0.3

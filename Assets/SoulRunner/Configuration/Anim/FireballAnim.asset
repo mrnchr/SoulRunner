@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c4b285f0d144f0895ba2aa38b87f26, type: 3}
+  m_Name: FireballAnim
+  m_EditorClassIdentifier: 
+  Anims:
+  - Name: 0
+    Asset: {fileID: 11400000, guid: 401595c76e3021b489209bd5e6cb5ca2, type: 2}
+    IsLoop: 0
+  - Name: 1
+    Asset: {fileID: 11400000, guid: 234a63063d8e7e7419f8df00c38c3f6f, type: 2}
+    IsLoop: 1
+  - Name: 2
+    Asset: {fileID: 11400000, guid: d8a16362929057d41bcfd6296e2a8dcf, type: 2}
+    IsLoop: 0

@@ -6,7 +6,7 @@ namespace SoulRunner.Player
 {
   public class CreatePlayerSystem : IEcsInitSystem
   {
-    private readonly EcsCustomInject<Hero> _hero = default;
+    private readonly EcsCustomInject<HeroConfig> _hero = default;
     private EcsWorld _world;
 
     public void Init(IEcsSystems systems)
@@ -17,6 +17,8 @@ namespace SoulRunner.Player
         .Speed = _hero.Value.MoveSpeed;
       _world.Add<Jumpable>(player)
         .jumpForce = _hero.Value.JumpForce;
+      _world.Add<Kelli>(player)
+        .NextHand = HandType.None;
 
       _world.Add<Crouchable>(player);
       _world.Add<ControllerByPlayer>(player);

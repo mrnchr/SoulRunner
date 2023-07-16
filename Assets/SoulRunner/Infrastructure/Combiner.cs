@@ -1,5 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using SoulRunner.Player;
+using SoulRunner.Player.Movement;
 using SoulRunner.Utility.Ecs.Combine;
 using UnityEngine;
 using Zenject;

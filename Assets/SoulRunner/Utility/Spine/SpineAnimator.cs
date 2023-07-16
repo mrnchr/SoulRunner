@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Spine;
 using Spine.Unity;
 
 namespace SoulRunner.Utility.Spine
@@ -8,24 +8,43 @@ namespace SoulRunner.Utility.Spine
   public class SpineAnimator<TEnum>
     where TEnum : Enum
   {
-    public SpineAnimationState<TEnum> Current { get; private set; }
-
-    private readonly SpineAnimationState<TEnum> _start;
-    private readonly SpineAnimationState<TEnum>[] _states;
+    private readonly SpineAnimatorLayer<TEnum>[] _layers;
+    private readonly List<SpineAnimationState<TEnum>> _states = new List<SpineAnimationState<TEnum>>();
     private readonly SkeletonAnimation _skeleton;
-    private SpineAnimationState<TEnum> _next;
 
-    public SpineAnimator(SkeletonAnimation skeleton, ConfigurableSpineAnimation<TEnum>[] anims, TEnum start)
+    public SpineAnimator(SkeletonAnimation skeleton, ConfigurableSpineAnimation<TEnum>[] anims, int layerCount = 1,
+      TEnum start = default)
     {
       _skeleton = skeleton;
-      _states = new SpineAnimationState<TEnum>[anims.Length];
-      for (int i = 0; i < _states.Length; i++)
-      {
-        _states[i] = new SpineAnimationState<TEnum>(anims[i]);
-      }
+      _layers = new SpineAnimatorLayer<TEnum>[layerCount];
+      for (int i = 0; i < _layers.Length; i++)
+        _layers[i] = new SpineAnimatorLayer<TEnum>(i, _skeleton);
 
-      _start = GetState(start);
+      foreach (var anim in anims)
+        _states.Add(new SpineAnimationState<TEnum>(anim));
+
+      if (layerCount == 1)
+        AddAnimationsToLayer(0, start, _states.ToArray());
     }
+
+    public SpineAnimator<TEnum> AddAnimationsToLayer(int index, TEnum start = default,
+      params SpineAnimationState<TEnum>[] anims)
+    {
+      var layer = GetLayer(index);
+      layer.Start ??= GetState(start);
+      layer.States.AddRange(anims);
+
+      return this;
+    }
+
+    public SpineAnimator<TEnum> AddAnimationsToLayer(int index, TEnum start = default,
+      params ConfigurableSpineAnimation<TEnum>[] anims) =>
+      AddAnimationsToLayer(index, start, _states.Where(x => anims.Contains(x.Animation)).ToArray());
+
+    public SpineAnimator<TEnum> AddAnimationsToLayer(int index, TEnum start = default, params TEnum[] names) =>
+      AddAnimationsToLayer(index, start, names.Select(GetState).ToArray());
+
+    public SpineAnimatorLayer<TEnum> GetLayer(int index) => _layers[index];
 
     public SpineAnimator<TEnum> AddTransition(TEnum from, TEnum to, Func<bool> condition, bool isHold = false)
     {
@@ -54,57 +73,23 @@ namespace SoulRunner.Utility.Spine
         CheckTransition();
     }
 
-    public void StartAnimate() => ChangeAnimation(_start);
-
-    private void ChangeAnimation(SpineAnimationState<TEnum> to)
+    public void StartAnimate()
     {
-      // Debug.Log($"Change {to.Animation.Name}");
-      Current = to;
-      _skeleton.state.SetAnimation(0, Current.Animation.Asset, Current.Animation.IsLoop);
-      CheckTransition();
+      foreach (var layer in _layers)
+      {
+        if (layer.Start == null)
+          throw new ArgumentNullException(nameof(layer.Start),
+            $"Animator layer by index {layer.Id} has not a start animation");
+      }
+
+      foreach (var layer in _layers)
+        layer.ChangeAnimation(layer.Start);
     }
 
     private void CheckTransition()
     {
-      ClearNext();
-      var transition = Current.FindFirstCompletedCondition();
-      if (transition != null)
-      {
-        if (transition.IsHold)
-        {
-          // Debug.Log($"Transition hold {transition.Destination.Animation.Name}");
-          DelayAnimation(transition.Destination);
-        }
-        else
-        {
-          // Debug.Log($"Transition change {transition.Destination.Animation.Name}");
-          ChangeAnimation(transition.Destination);
-        }
-      }
-    }
-
-    private void ClearNext()
-    {
-      _next = null;
-      _skeleton.state.Complete -= OnAnimationCompleted;
-    }
-
-    private void DelayAnimation(SpineAnimationState<TEnum> to)
-    {
-      // Debug.Log(_skeleton.state.Tracks.Items[0].Animation.Name);
-      // Debug.Log($"Delay {to.Animation.Name}");
-      _next = to;
-      _skeleton.state.Complete += OnAnimationCompleted;
-    }
-
-    private void OnAnimationCompleted(TrackEntry trackentry)
-    {
-      if (trackentry.Animation != Current.Animation.Asset.Animation) return;
-      
-      // Debug.Log(trackentry.Animation.Name);
-      // Debug.Log($"Transition {_next.Animation.Name}");
-      ChangeAnimation(_next);
-      _skeleton.state.Complete -= OnAnimationCompleted;
+      foreach (var layer in _layers)
+        layer.CheckTransition();
     }
   }
 }
