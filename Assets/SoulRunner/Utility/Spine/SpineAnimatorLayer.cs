@@ -24,30 +24,30 @@ namespace SoulRunner.Utility.Spine
     public void ChangeAnimation(SpineAnimationState<TEnum> to)
     {
       Current = to;
+      if (CheckTransition()) return;
+      
       if (Current.Animation.Asset)
         Skeleton.state.SetAnimation(Id, Current.Animation.Asset, Current.Animation.IsLoop);
       else
         Skeleton.state.SetEmptyAnimation(Id, 0);
-      CheckTransition();
     }
 
-    public void CheckTransition()
+    public bool CheckTransition()
     {
       ClearNext();
-      var transition = Current.FindFirstCompletedCondition();
-      if (transition != null)
+      var transition = Current?.FindFirstCompletedCondition();
+      if (transition == null) return false;
+      if (transition.IsHold)
       {
-        if (transition.IsHold)
-        {
-          // Debug.Log($"Transition hold {transition.Destination.Animation.Name}");
-          DelayAnimation(transition.Destination);
-        }
-        else
-        {
-          // Debug.Log($"Transition change {transition.Destination.Animation.Name}");
-          ChangeAnimation(transition.Destination);
-        }
+        // Debug.Log($"Transition now {Current.Animation.Name}");
+        // Debug.Log($"Transition hold {transition.Destination.Animation.Name}");
+        DelayAnimation(transition.Destination);
+        return false;
       }
+      
+      // Debug.Log($"Transition change {transition.Destination.Animation.Name}");
+      ChangeAnimation(transition.Destination);
+      return true;
     }
 
     public void ClearNext()
@@ -58,18 +58,18 @@ namespace SoulRunner.Utility.Spine
 
     public void DelayAnimation(SpineAnimationState<TEnum> to)
     {
-      // Debug.Log(_skeleton.state.Tracks.Items[0].Animation.Name);
+      // Debug.Log(Skeleton.state.Tracks.Items[0].Animation.Name);
       // Debug.Log($"Delay {to.Animation.Name}");
       Next = to;
       Skeleton.state.Complete += OnAnimationCompleted;
     }
 
-    public void OnAnimationCompleted(TrackEntry trackentry)
+    public void OnAnimationCompleted(TrackEntry trackEntry)
     {
-      if (trackentry.Animation != Current.Animation.Asset.Animation && trackentry.TrackIndex != Id) return;
+      if (trackEntry.Animation != Current.Animation.Asset.Animation && trackEntry.TrackIndex != Id) return;
       
-      // Debug.Log(trackentry.Animation.Name);
-      // Debug.Log($"Transition {_next.Animation.Name}");
+      // Debug.Log(trackEntry.Animation.Name);
+      // Debug.Log($"Transition {Next.Animation.Name}");
       ChangeAnimation(Next);
       Skeleton.state.Complete -= OnAnimationCompleted;
     }

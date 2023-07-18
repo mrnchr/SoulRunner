@@ -1,14 +1,22 @@
 ﻿using System;
-using UnityEngine.Serialization;
+using UnityEngine;
 
 namespace SoulRunner.Player
 {
   [Serializable]
   public class HeroConfig
   {
-    [FormerlySerializedAs("moveSpeed")] public float MoveSpeed;
-    [FormerlySerializedAs("jumpForce")] public float JumpForce;
-    public float HoldFireTime;
+    [Header("General")]
+    public float MoveSpeed;
+    public float JumpForce;
+    
+    [Header("Kelli")]
+    public float FireDelay;
     public float FireTime;
+    public float DashSpeed;
+    public LayerMask DefaultLayer;
+    public LayerMask DashLayer;
+    public float DashDuration;
+    public float DashDelay;
   }
 }

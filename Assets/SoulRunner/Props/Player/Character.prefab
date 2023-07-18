@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ground:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 2551
   Entity: 0
 --- !u!1 &345630075131020877
 GameObject:

@@ -8,7 +8,7 @@ namespace SoulRunner.Player
 {
   public class MoveSystem : IEcsRunSystem, IEcsInitSystem
   {
-    private readonly EcsFilterInject<Inc<MoveCommand, PlayerViewRef>, Exc<Crouching>> _moves = default;
+    private readonly EcsFilterInject<Inc<MoveCommand, PlayerViewRef>, Exc<Crouching, Dashing>> _moves = default;
     private EcsWorld _world;
 
     public void Init(IEcsSystems systems)
@@ -25,7 +25,7 @@ namespace SoulRunner.Player
         float speed = _world.Get<Movable>(index).Speed;
         rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 
-        _world.Add<Moving>(index).Direction = direction;
+        _world.Add<StartMove>(index).Direction = direction;
       }
     }
   }

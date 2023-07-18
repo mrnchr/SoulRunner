@@ -4,7 +4,6 @@ using SoulRunner.Configuration.Anim;
 using SoulRunner.Utility.Spine;
 using Spine.Unity;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SoulRunner.Player
 {
@@ -19,20 +18,31 @@ namespace SoulRunner.Player
     private bool _isCrouch;
     private bool _rightFireTrigger;
     private bool _leftFireTrigger;
+    private bool _dashTrigger;
+
+    public bool DashTrigger
+    {
+      private get => _dashTrigger;
+      set
+      {
+        _animator.SetVariable(value, ref _dashTrigger);
+        _dashTrigger = false;
+      }
+    }
 
     public bool RightFireTrigger
     {
-      get => _rightFireTrigger;
+      private get => _rightFireTrigger;
       set
       {
         _animator.SetVariable(value, ref _rightFireTrigger);
         _rightFireTrigger = false;
       }
     }
-    
+
     public bool LeftFireTrigger
     {
-      get => _leftFireTrigger;
+      private get => _leftFireTrigger;
       set
       {
         _animator.SetVariable(value, ref _leftFireTrigger);
@@ -76,25 +86,39 @@ namespace SoulRunner.Player
 
       _animator
         // layer #0  
-        .AddTransition(KelliAnimType.Idle, KelliAnimType.Run, () => IsRun)
+        .CreateTransition()
+        .From(KelliAnimType.Idle)
+        .To(KelliAnimType.Run)
+        .End(() => IsRun)
+        .CreateTransition()
+        .From(KelliAnimType.Idle, KelliAnimType.Run)
+        .To(KelliAnimType.JumpStart)
+        .End(() => IsJump)
+        .CreateTransition()
+        .From(KelliAnimType.Idle, KelliAnimType.Run)
+        .To(KelliAnimType.Crouch)
+        .End(() => IsCrouch)
+        .CreateTransition()
+        .From(KelliAnimType.Idle, KelliAnimType.Run, KelliAnimType.JumpStart, KelliAnimType.JumpIdle,
+          KelliAnimType.JumpLand)
+        .To(KelliAnimType.Dash)
+        .End(() => DashTrigger)
         .AddTransition(KelliAnimType.Run, KelliAnimType.Idle, () => !IsRun)
-        .AddTransition(KelliAnimType.Run, KelliAnimType.JumpStart, () => IsJump)
-        .AddTransition(KelliAnimType.Idle, KelliAnimType.JumpStart, () => IsJump)
         .AddTransition(KelliAnimType.JumpStart, KelliAnimType.JumpIdle, () => true, true)
         .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.JumpLand, () => !IsJump && !IsCrouch)
         .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.Crouch, () => !IsJump && IsCrouch)
-        .AddTransition(KelliAnimType.JumpLand, KelliAnimType.Idle, () => !IsRun, true)
-        .AddTransition(KelliAnimType.JumpLand, KelliAnimType.Run, () => IsRun)
-        .AddTransition(KelliAnimType.Idle, KelliAnimType.Crouch, () => IsCrouch)
-        .AddTransition(KelliAnimType.Run, KelliAnimType.Crouch, () => IsCrouch)
-        .AddTransition(KelliAnimType.Crouch, KelliAnimType.Idle, () => !IsCrouch && !IsRun)
-        .AddTransition(KelliAnimType.Crouch, KelliAnimType.Run, () => !IsCrouch && IsRun)
-        
+        .AddTransition(KelliAnimType.JumpLand, KelliAnimType.Idle, () => true, true)
+        .AddTransition(KelliAnimType.Crouch, KelliAnimType.Idle, () => !IsCrouch)
+        .AddTransition(KelliAnimType.Dash, KelliAnimType.Idle, () => !IsJump, true)
+        .AddTransition(KelliAnimType.Dash, KelliAnimType.JumpIdle, () => IsJump, true)
+
         // layer #1
         .AddTransition(KelliAnimType.Empty, KelliAnimType.FireLeftHand, () => LeftFireTrigger)
         .AddTransition(KelliAnimType.Empty, KelliAnimType.FireRightHand, () => RightFireTrigger)
-        .AddTransition(KelliAnimType.FireLeftHand, KelliAnimType.Empty, () => true, true)
-        .AddTransition(KelliAnimType.FireRightHand, KelliAnimType.Empty, () => true, true);
+        .CreateTransition()
+        .From(KelliAnimType.FireLeftHand, KelliAnimType.FireRightHand)
+        .To(KelliAnimType.Empty)
+        .End(() => true, true);
     }
 
     private void Start()

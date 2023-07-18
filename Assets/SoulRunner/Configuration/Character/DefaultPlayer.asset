@@ -15,5 +15,14 @@ MonoBehaviour:
   HeroCfg:
     MoveSpeed: 7
     JumpForce: 25
-    HoldFireTime: 1
+    FireDelay: 1
     FireTime: 0.3
+    DashSpeed: 10
+    DefaultLayer:
+      serializedVersion: 2
+      m_Bits: 64
+    DashLayer:
+      serializedVersion: 2
+      m_Bits: 1024
+    DashDuration: 0.5
+    DashDelay: 1

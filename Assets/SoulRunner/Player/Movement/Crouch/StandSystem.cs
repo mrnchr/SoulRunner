@@ -22,7 +22,7 @@ namespace SoulRunner.Player.Movement
         view.CrouchCollider.enabled = false;
         view.StayCollider.enabled = true;
 
-        _world.Add<Standing>(index);
+        _world.Add<StartStand>(index);
       }
     }
   }

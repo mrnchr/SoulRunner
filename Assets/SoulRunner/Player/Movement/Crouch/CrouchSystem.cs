@@ -22,6 +22,7 @@ namespace SoulRunner.Player.Movement
         PlayerView view = _world.Get<PlayerViewRef>(index).Value;
         view.StayCollider.enabled = false;
         view.CrouchCollider.enabled = true;
+        view.Rb.velocity = Vector2.zero;
 
         _world.Add<Crouching>(index);
       }

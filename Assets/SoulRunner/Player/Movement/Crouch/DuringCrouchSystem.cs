@@ -18,7 +18,6 @@ namespace SoulRunner.Player.Movement
     {
       foreach (int index in _crouching.Value)
       {
-        UnityEngine.Debug.Log("Stand");
         _world.Del<Crouching>(index);
         _world.Add<StandCommand>(index);
       }

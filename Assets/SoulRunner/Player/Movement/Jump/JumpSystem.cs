@@ -24,12 +24,11 @@ namespace SoulRunner.Player
         PlayerView view = _world.Get<PlayerViewRef>(index).Value;
         if (!_world.Has<OnGround>(index)) continue;
         
-        Debug.Log("Jump");
         view.Rb.velocity = ResetYToZero(view.Rb.velocity);
         view.Rb.AddForce(Vector2.up * jumpable.jumpForce, ForceMode2D.Impulse);
           
         _world.Del<OnGround>(index);
-        _world.Add<Jumping>(index);
+        _world.Add<StartJump>(index);
       }
     }
 

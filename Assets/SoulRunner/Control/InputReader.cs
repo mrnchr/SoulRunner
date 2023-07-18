@@ -8,8 +8,8 @@ namespace SoulRunner.Control
   public class InputReader : MonoBehaviour
   {
     private Rewired.Player _player;
-    public Action OnAbility1;
-    public Action OnAbility2;
+    public Action OnMainAbility;
+    public Action OnDash;
     public Action OnCrouch;
     public Action OnFireLeft;
     public Action OnFireRight;
@@ -33,8 +33,8 @@ namespace SoulRunner.Control
       ReadInput(Idents.InputActions.Crouch, OnCrouch);
       ReadInput(Idents.InputActions.FireLeft, OnFireLeft);
       ReadInput(Idents.InputActions.FireRight, OnFireRight);
-      ReadInput(Idents.InputActions.MainAbility, OnAbility1);
-      ReadInput(Idents.InputActions.SideAbility, OnAbility2);
+      ReadInput(Idents.InputActions.MainAbility, OnMainAbility);
+      ReadInput(Idents.InputActions.SideAbility, OnDash);
       ReadInput(Idents.InputActions.PickUp, OnPickUp);
       ReadInput(Idents.InputActions.UseItem, OnUse);
       ReadInput(Idents.InputActions.SwapHero, OnSwapHero);

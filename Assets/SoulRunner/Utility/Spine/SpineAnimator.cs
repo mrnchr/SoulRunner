@@ -44,9 +44,7 @@ namespace SoulRunner.Utility.Spine
     public SpineAnimator<TEnum> AddAnimationsToLayer(int index, TEnum start = default, params TEnum[] names) =>
       AddAnimationsToLayer(index, start, names.Select(GetState).ToArray());
 
-    public SpineAnimatorLayer<TEnum> GetLayer(int index) => _layers[index];
-
-    public SpineAnimator<TEnum> AddTransition(TEnum from, TEnum to, Func<bool> condition, bool isHold = false)
+    public SpineAnimator<TEnum> AddTransition(TEnum from, TEnum to, Func<bool> when, bool isHold = false)
     {
       GetState(from)
         .Transitions
@@ -55,11 +53,15 @@ namespace SoulRunner.Utility.Spine
           {
             Destination = GetState(to),
             IsHold = isHold,
-            Condition = condition
+            Condition = when
           });
 
       return this;
     }
+
+
+    public TransitionCreation<TEnum> CreateTransition() => new TransitionCreation<TEnum>(this);
+    public SpineAnimatorLayer<TEnum> GetLayer(int index) => _layers[index];
 
     public SpineAnimationState<TEnum> GetState(TEnum type) =>
       _states.First(x => x.Animation.Name.Equals(type));

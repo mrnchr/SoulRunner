@@ -18,6 +18,7 @@ namespace SoulRunner.Control
     private bool _isJump;
     private bool _isCrouch;
     private HandType _nextHand;
+    private bool _isDash;
 
     public void Init(IEcsSystems systems)
     {
@@ -28,6 +29,7 @@ namespace SoulRunner.Control
       _input.OnCrouch += () => _isCrouch = true;
       _input.OnFireLeft += () => _nextHand = HandType.Left;
       _input.OnFireRight += () => _nextHand = HandType.Right;
+      _input.OnDash += () => _isDash = true;
     }
 
     public void Run(IEcsSystems systems)
@@ -41,6 +43,7 @@ namespace SoulRunner.Control
       Jump();
       Crouch();
       Fire();
+      Dash();
 
       Reset();
     }
@@ -52,6 +55,7 @@ namespace SoulRunner.Control
       _input.OnCrouch -= () => _isCrouch = true;
       _input.OnFireLeft -= () => _nextHand = HandType.Left;
       _input.OnFireRight -= () => _nextHand = HandType.Right;
+      _input.OnDash -= () => _isDash = true;
     }
 
     private void Move(float dir)
@@ -79,12 +83,19 @@ namespace SoulRunner.Control
           .Hand = _nextHand;
     }
 
+    private void Dash()
+    {
+      if (_isDash)
+        _world.Add<DashCommand>(_player);
+    }
+
     private void Reset()
     {
       _moveDirection = default;
       _isJump = default;
       _isCrouch = default;
       _nextHand = default;
+      _isDash = default;
     }
   }
 }
