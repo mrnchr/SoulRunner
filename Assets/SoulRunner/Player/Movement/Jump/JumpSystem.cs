@@ -8,7 +8,7 @@ namespace SoulRunner.Player
 {
   public class JumpSystem : IEcsRunSystem, IEcsInitSystem
   {
-    private readonly EcsFilterInject<Inc<JumpCommand, Jumpable, PlayerViewRef>, Exc<Crouching>> _jumps = default;
+    private readonly EcsFilterInject<Inc<UpCommand, Jumpable, PlayerViewRef>, Exc<Crouching, Climbing, Falling>> _jumps = default;
     private EcsWorld _world;
 
     public void Init(IEcsSystems systems)
@@ -25,10 +25,11 @@ namespace SoulRunner.Player
         if (!_world.Has<OnGround>(index)) continue;
         
         view.Rb.velocity = ResetYToZero(view.Rb.velocity);
-        view.Rb.AddForce(Vector2.up * jumpable.jumpForce, ForceMode2D.Impulse);
+        view.Rb.AddForce(Vector2.up * jumpable.JumpForce, ForceMode2D.Impulse);
           
         _world.Del<OnGround>(index);
         _world.Add<StartJump>(index);
+        _world.AddSoftly<Jumping>(index);
       }
     }
 

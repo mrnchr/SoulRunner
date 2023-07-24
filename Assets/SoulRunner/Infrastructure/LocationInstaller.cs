@@ -4,6 +4,7 @@ using SoulRunner.Configuration.Source;
 using SoulRunner.Control;
 using SoulRunner.Fireball;
 using SoulRunner.Player;
+using SoulRunner.Player.Movement;
 using SoulRunner.Utility.Ecs.Combine;
 using UnityEngine;
 using Zenject;
@@ -35,9 +36,10 @@ namespace SoulRunner.Infrastructure
       BindWorld();
       
       BindGroundCheckerService();
+      BindLedgeCheckerService();
       BindInputService();
       BindFireballService();
-      
+
       BindCombineInjector();
     }
 
@@ -65,6 +67,13 @@ namespace SoulRunner.Infrastructure
     {
       Container
         .Bind<GroundCheckerService>()
+        .AsCached();
+    }
+
+    private void BindLedgeCheckerService()
+    {
+      Container
+        .Bind<LedgeCheckerService>()
         .AsCached();
     }
 
@@ -108,7 +117,7 @@ namespace SoulRunner.Infrastructure
 
     private void BindHero() =>
       Container
-        .BindInstance(_heroSo.HeroCfg)
+        .BindInstance(_heroSo.PlayerCfg)
         .AsCached();
 
     private void BindInputService() =>

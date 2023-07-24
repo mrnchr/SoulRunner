@@ -88,7 +88,7 @@ namespace SoulRunner.Utility.Spine
         layer.ChangeAnimation(layer.Start);
     }
 
-    private void CheckTransition()
+    public void CheckTransition()
     {
       foreach (var layer in _layers)
         layer.CheckTransition();

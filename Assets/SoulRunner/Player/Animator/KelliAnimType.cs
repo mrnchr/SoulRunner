@@ -8,7 +8,7 @@
     Crouch = 3,
     Dash = 4,
     Death = 5,
-    Wall = 6,
+    Climb = 6,
     RunSwitch = 7,
     JumpStart = 8,
     JumpIdle = 9,

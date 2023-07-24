@@ -2,6 +2,6 @@
 {
   public struct Jumpable
   {
-    public float jumpForce;
+    public float JumpForce;
   }
 }

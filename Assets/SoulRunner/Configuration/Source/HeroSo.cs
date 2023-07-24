@@ -7,6 +7,6 @@ namespace SoulRunner.Configuration
   [CreateAssetMenu(fileName = "Character", menuName = "SoulRunner/Character/Character")]
   public class HeroSo : ScriptableObject
   {
-    [FormerlySerializedAs("Hero"),FormerlySerializedAs("hero"),FormerlySerializedAs("character")] public HeroConfig HeroCfg;
+    [FormerlySerializedAs("HeroCfg"),FormerlySerializedAs("Hero"),FormerlySerializedAs("hero"),FormerlySerializedAs("character")] public PlayerConfig PlayerCfg;
   }
 }

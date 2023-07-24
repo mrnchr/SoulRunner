@@ -3,7 +3,6 @@ using Leopotam.EcsLite.Di;
 using SoulRunner.Player;
 using SoulRunner.Player.Movement;
 using SoulRunner.Utility.Ecs;
-using UnityEngine;
 
 namespace SoulRunner.Control
 {
@@ -15,8 +14,8 @@ namespace SoulRunner.Control
     private EcsWorld _world;
 
     private float _moveDirection;
-    private bool _isJump;
-    private bool _isCrouch;
+    private bool _isUp;
+    private bool _isDown;
     private HandType _nextHand;
     private bool _isDash;
 
@@ -25,11 +24,13 @@ namespace SoulRunner.Control
       _world = systems.GetWorld();
       _input = _inputReader.Value;
       _input.OnMove += x => _moveDirection = x;
-      _input.OnJump += () => _isJump = true;
-      _input.OnCrouch += () => _isCrouch = true;
+      _input.OnJump += () => _isUp = true;
+      _input.OnCrouch += () => _isDown = true;
       _input.OnFireLeft += () => _nextHand = HandType.Left;
       _input.OnFireRight += () => _nextHand = HandType.Right;
       _input.OnDash += () => _isDash = true;
+      _input.OnClimbUp += () => _isUp = true;
+      _input.OnClimbDown += () => _isDown = true;
     }
 
     public void Run(IEcsSystems systems)
@@ -40,8 +41,8 @@ namespace SoulRunner.Control
         .GetRawEntities()[0];
 
       Move(_moveDirection);
-      Jump();
-      Crouch();
+      Up();
+      Down();
       Fire();
       Dash();
 
@@ -51,11 +52,13 @@ namespace SoulRunner.Control
     public void Destroy(IEcsSystems systems)
     {
       _input.OnMove -= x => _moveDirection = x;
-      _input.OnJump -= () => _isJump = true;
-      _input.OnCrouch -= () => _isCrouch = true;
+      _input.OnJump -= () => _isUp = true;
+      _input.OnCrouch -= () => _isDown = true;
       _input.OnFireLeft -= () => _nextHand = HandType.Left;
       _input.OnFireRight -= () => _nextHand = HandType.Right;
       _input.OnDash -= () => _isDash = true;
+      _input.OnClimbUp -= () => _isUp = true;
+      _input.OnClimbDown -= () => _isDown = true;
     }
 
     private void Move(float dir)
@@ -64,16 +67,16 @@ namespace SoulRunner.Control
         .Direction = dir;
     }
 
-    private void Jump()
+    private void Up()
     {
-      if(_isJump)
-        _world.Add<JumpCommand>(_player);
+      if(_isUp)
+        _world.Add<UpCommand>(_player);
     }
 
-    private void Crouch()
+    private void Down()
     {
-      if(_isCrouch)
-        _world.Add<CrouchCommand>(_player);
+      if(_isDown)
+        _world.Add<DownCommand>(_player);
     }
 
     private void Fire()
@@ -92,8 +95,8 @@ namespace SoulRunner.Control
     private void Reset()
     {
       _moveDirection = default;
-      _isJump = default;
-      _isCrouch = default;
+      _isUp = default;
+      _isDown = default;
       _nextHand = default;
       _isDash = default;
     }

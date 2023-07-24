@@ -12,20 +12,29 @@ namespace SoulRunner.Player.Movement
     {
       systems
         .DelHere<MoveCommand>()
-        .DelHere<JumpCommand>()
-        .DelHere<CrouchCommand>()
+        .DelHere<UpCommand>()
+        .DelHere<DownCommand>()
         .DelHere<StandCommand>()
         .DelHere<FireCommand>()
         .DelHere<DashCommand>()
+        .DelHere<CatchCommand>()
         .DelHere<StartMove>()
         .DelHere<StartJump>()
         .DelHere<StartStand>()
         .DelHere<StartFire>()
         .DelHere<StartDash>()
+        .DelHere<StartClimb>()
+        .DelHere<StartFall>()
+        .DelHere<EndJump>()
+        .DelHere<EndClimb>()
+        .DelHere<EndFall>()
         .Add(new InputSystem())
+        // Kelli's Actions
         .Add(new DuringCrouchSystem())
         .Add(new MoveSystem())
         .Add(new JumpSystem())
+        .Add(new LandSystem())
+        .Add(new FallSystem())
         .Add(new StandSystem())
         .Add(new CrouchSystem())
         .Add(new DelTimer<DelayFire>())
@@ -37,7 +46,13 @@ namespace SoulRunner.Player.Movement
         .Add(new Timer<DelayDash>())
         .Add(new Timer<Dashing>())
         .Add(new DashSystem())
-        .Add(new EndDashSystem());
+        .Add(new EndDashSystem())
+        // Kelli's Climb Actions
+        .Add(new StartClimbSystem())
+        .Add(new DelTimer<AfterJump>())
+        .Add(new Timer<AfterJump>())
+        .Add(new ClimbUpSystem())
+        .Add(new ClimbDownSystem());
     }
   }
 }

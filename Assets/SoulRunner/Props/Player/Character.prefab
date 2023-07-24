@@ -146,7 +146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345630074562692952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.48032725, y: 0.3516526, z: 0}
+  m_LocalPosition: {x: 0.5385869, y: 1.4206672, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -238,7 +238,8 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 2551
-  Entity: 0
+  View: {fileID: 0}
+  _machine: {fileID: 0}
 --- !u!1 &345630075131020877
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &345630075131020864
 Transform:
   m_ObjectHideFlags: 0
@@ -297,9 +298,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 345630075131020877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 813ee9e5570b42f40bf2fea66402ad40, type: 3}
+  m_Script: {fileID: 11500000, guid: 08a1309b366e4b818233f175416c5398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  View: {fileID: 0}
 --- !u!1 &345630075180562081
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,10 +396,25 @@ MonoBehaviour:
   Rb: {fileID: 345630075180562085}
   CurrentAnimator: {fileID: 675583119293948836}
   GroundChecker: {fileID: 345630075055785363}
+  LedgeChecker: {fileID: 345630075131020878}
   StayCollider: {fileID: 345630075180562084}
   CrouchCollider: {fileID: 2328029380596182816}
   RightHand: {fileID: 345630075695392324}
   LeftHand: {fileID: 345630074562692953}
+  DefaultLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  DashLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  PlayerCfg:
+    MoveSpeed: 0
+    JumpForce: 0
+    FireDelay: 0
+    FireTime: 0
+    DashSpeed: 0
+    DashDuration: 0
+    DashDelay: 0
 --- !u!114 &675583119293948836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +564,7 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  _animationName: moving/seat
+  _animationName: 
   loop: 0
   timeScale: 1.4
 --- !u!114 &345630075404894863
@@ -591,7 +608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345630075695392323}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4358203, y: 0.71862054, z: 0}
+  m_LocalPosition: {x: -0.15682542, y: 1.4885272, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

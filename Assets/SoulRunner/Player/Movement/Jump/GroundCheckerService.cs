@@ -16,7 +16,12 @@ namespace SoulRunner.Player
 
     public void OnGroundEnter(int entity)
     {
-      _world.Update<OnGround>(entity);
+      _world.AddSoftly<OnGround>(entity);
+    }
+    
+    public void OnGroundExit(int entity)
+    {
+      _world.DelSoftly<OnGround>(entity);
     }
   }
 }

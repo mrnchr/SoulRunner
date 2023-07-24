@@ -7,7 +7,7 @@ namespace SoulRunner.Player.Movement
 {
   public class CrouchSystem : IEcsRunSystem, IEcsInitSystem
   {
-    private readonly EcsFilterInject<Inc<CrouchCommand, Crouchable, PlayerViewRef>, Exc<Crouching, InJump>> _crouches = default;
+    private readonly EcsFilterInject<Inc<DownCommand, Crouchable, PlayerViewRef>, Exc<Crouching, Jumping, Climbing, Falling>> _crouches = default;
     private EcsWorld _world;
 
     public void Init(IEcsSystems systems)

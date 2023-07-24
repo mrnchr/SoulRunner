@@ -1,14 +1,13 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using SoulRunner.Player.Movement;
 using SoulRunner.Utility.Ecs;
 using UnityEngine;
 
-namespace SoulRunner.Player
+namespace SoulRunner.Player.Movement
 {
   public class MoveSystem : IEcsRunSystem, IEcsInitSystem
   {
-    private readonly EcsFilterInject<Inc<MoveCommand, PlayerViewRef>, Exc<Crouching, Dashing>> _moves = default;
+    private readonly EcsFilterInject<Inc<MoveCommand, PlayerViewRef>, Exc<Crouching, Dashing, Climbing>> _moves = default;
     private EcsWorld _world;
 
     public void Init(IEcsSystems systems)

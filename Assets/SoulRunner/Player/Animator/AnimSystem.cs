@@ -9,13 +9,7 @@ namespace SoulRunner.Player
 {
   public class AnimSystem : IEcsRunSystem, IEcsInitSystem
   {
-    private readonly EcsFilterInject<Inc<StartMove, PlayerViewRef>> _moving = default;
-    private readonly EcsFilterInject<Inc<StartJump, PlayerViewRef>> _jumping = default;
-    private readonly EcsFilterInject<Inc<InJump, OnGround, PlayerViewRef>> _landing = default;
-    private readonly EcsFilterInject<Inc<Crouching, PlayerViewRef>> _crouching = default;
-    private readonly EcsFilterInject<Inc<StartStand, PlayerViewRef>> _standing = default;
-    private readonly EcsFilterInject<Inc<StartFire, Kelli, PlayerViewRef>> _firing = default;
-    private readonly EcsFilterInject<Inc<StartDash, Kelli, PlayerViewRef>> _dashing = default;
+    private readonly EcsFilterInject<Inc<PlayerViewRef>> _player = default;
     private EcsWorld _world;
 
     public void Init(IEcsSystems systems)
@@ -25,34 +19,71 @@ namespace SoulRunner.Player
 
     public void Run(IEcsSystems systems)
     {
-      AnimateMoving();
-      AnimateJumping();
-      AnimateLanding();
-      AnimateCrouching();
-      AnimateStanding();
-      AnimateFiring();
-      AnimateDash();
+      foreach (int index in _player.Value)
+      {
+        PlayerView player = _player.Pools.Inc1.Get(index).Value;
+        KelliAnimator anim = player.CurrentAnimator;
+        
+        AnimateMove(index, anim, player);
+        AnimateJump(index, anim);
+        AnimateFall(index, anim);
+        AnimateCrouch(index, anim);
+
+        if (_world.Has<Kelli>(index))
+        {
+          AnimateFire(index, anim);
+          AnimateDash(index, anim);
+        }
+
+        AnimateClimb(index, anim);
+      }
     }
 
-    private void AnimateDash()
+    private void AnimateFall(int index, KelliAnimator anim)
     {
-      foreach (int index in _dashing.Value)
-        _world.Get<PlayerViewRef>(index).Value.CurrentAnimator.DashTrigger = true;
+      if (_world.Has<StartFall>(index))
+      {
+        anim.IsFall = true;
+        anim.IsJump = true;
+      }
+
+      if (_world.Has<EndFall>(index))
+      {
+        anim.IsFall = false;
+        anim.IsJump = false;
+      }
     }
 
-    private void AnimateFiring()
+    private void AnimateClimb(int index, KelliAnimator anim)
     {
-      foreach (int index in _firing.Value)
+      if (_world.Has<StartClimb>(index))
+      {
+        anim.IsClimb = true;
+        GlueViewToLedge(index);
+      }
+
+      if (_world.Has<EndClimb>(index))
+        anim.IsClimb = false;
+    }
+
+    private void AnimateDash(int index, KelliAnimator anim)
+    {
+      if (_world.Has<StartDash>(index))
+        anim.DashTrigger = true;
+    }
+
+    private void AnimateFire(int index, KelliAnimator anim)
+    {
+      if (_world.Has<StartFire>(index))
       {
         HandType hand = _world.Get<StartFire>(index).Hand;
-        PlayerView view = _world.Get<PlayerViewRef>(index).Value;
         switch (hand)
         {
           case HandType.Left:
-            view.CurrentAnimator.LeftFireTrigger = true;
+            anim.LeftFireTrigger = true;
             break;
           case HandType.Right:
-            view.CurrentAnimator.RightFireTrigger = true;
+            anim.RightFireTrigger = true;
             break;
           case HandType.None:
           default:
@@ -61,46 +92,40 @@ namespace SoulRunner.Player
       }
     }
 
-    private void AnimateStanding()
+    private void AnimateCrouch(int index, KelliAnimator anim)
     {
-      foreach (int index in _standing.Value)
-        _world.Get<PlayerViewRef>(index).Value.CurrentAnimator.IsCrouch = false;
+      if (_world.Has<Crouching>(index))
+        anim.IsCrouch = true;
+      if (_world.Has<StartStand>(index))
+        anim.IsCrouch = false;
     }
 
-    private void AnimateCrouching()
+    private void AnimateJump(int index, KelliAnimator anim)
     {
-      foreach (int index in _crouching.Value)
-        _world.Get<PlayerViewRef>(index).Value.CurrentAnimator.IsCrouch = true;
+      if (_world.Has<StartJump>(index))
+        anim.IsJump = true;
+      if (_world.Has<EndJump>(index))
+        anim.IsJump = false;
     }
 
-    private void AnimateLanding()
+    private void AnimateMove(int index, KelliAnimator anim, PlayerView player)
     {
-      foreach (int index in _landing.Value)
-      {
-        _world.Get<PlayerViewRef>(index).Value.CurrentAnimator.IsJump = false;
-        _world.Del<InJump>(index);
-      }
-    }
-
-    private void AnimateJumping()
-    {
-      foreach (int index in _jumping.Value)
-      {
-        _world.Get<PlayerViewRef>(index).Value.CurrentAnimator.IsJump = true;
-        _world.Update<InJump>(index);
-      }
-    }
-
-    private void AnimateMoving()
-    {
-      foreach (int index in _moving.Value)
+      if (_world.Has<StartMove>(index))
       {
         float direction = _world.Get<StartMove>(index).Direction;
-        PlayerView player = _world.Get<PlayerViewRef>(index).Value;
 
-        player.CurrentAnimator.IsRun = direction != 0;
+        anim.IsRun = direction != 0;
         player.transform.localScale = SetViewDirection(player.transform.localScale, direction);
       }
+    }
+
+    private void GlueViewToLedge(int entity)
+    {
+      float posX = _world.Get<OnLedge>(entity).PosX;
+      PlayerView view = _world.Get<PlayerViewRef>(entity).Value;
+      Vector3 pos = view.transform.position;
+      pos.x += posX - view.LedgeChecker.transform.position.x;
+      view.transform.position = pos;
     }
 
     private Vector3 SetViewDirection(Vector3 scale, float moveDirection)

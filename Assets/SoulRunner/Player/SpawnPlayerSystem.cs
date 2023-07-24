@@ -15,8 +15,10 @@ namespace SoulRunner.Player
       _world = systems.GetWorld();
       int player = _world.Filter<ControllerByPlayer>().End(1).GetRawEntities()[0];
 
+      PlayerView view = _factory.Value.Create(_level.Value.PlayerSpawn.position);
       _world.Add<PlayerViewRef>(player)
-        .Value = _factory.Value.Create(_level.Value.PlayerSpawn.position);
+        .Value = view;
+      view.Entity = player;
     }
   }
 }

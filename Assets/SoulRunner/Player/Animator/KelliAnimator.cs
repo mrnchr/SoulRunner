@@ -13,59 +13,68 @@ namespace SoulRunner.Player
     public KelliAnim Assets;
 
     private SpineAnimator<KelliAnimType> _animator;
-    private bool _isJump;
-    private bool _isRun;
-    private bool _isCrouch;
-    private bool _rightFireTrigger;
-    private bool _leftFireTrigger;
-    private bool _dashTrigger;
+    private bool _needCheck;
 
+    [SerializeField] private bool _dashTrigger;
     public bool DashTrigger
     {
       private get => _dashTrigger;
-      set
-      {
-        _animator.SetVariable(value, ref _dashTrigger);
-        _dashTrigger = false;
-      }
+      set => SetVariable(value, ref _dashTrigger);
     }
 
+    [SerializeField] private bool _rightFireTrigger;
     public bool RightFireTrigger
     {
       private get => _rightFireTrigger;
-      set
-      {
-        _animator.SetVariable(value, ref _rightFireTrigger);
-        _rightFireTrigger = false;
-      }
+      set => SetVariable(value, ref _rightFireTrigger);
     }
 
+    [SerializeField] private bool _leftFireTrigger;
     public bool LeftFireTrigger
     {
       private get => _leftFireTrigger;
-      set
-      {
-        _animator.SetVariable(value, ref _leftFireTrigger);
-        _leftFireTrigger = false;
-      }
+      set => SetVariable(value, ref _leftFireTrigger);
     }
-
+    
+    [SerializeField] private bool _isRun;
     public bool IsRun
     {
       get => _isRun;
-      set => _animator.SetVariable(value, ref _isRun);
+      set => SetVariable(value, ref _isRun);
     }
 
+    [SerializeField] private bool _isJump;
     public bool IsJump
     {
       get => _isJump;
-      set => _animator.SetVariable(value, ref _isJump);
+      set => SetVariable(value, ref _isJump);
     }
 
+    [SerializeField] private bool _isCrouch;
     public bool IsCrouch
     {
       get => _isCrouch;
-      set => _animator.SetVariable(value, ref _isCrouch);
+      set => SetVariable(value, ref _isCrouch);
+    }
+
+    [SerializeField] private bool _isClimb;
+    public bool IsClimb
+    {
+      get => _isClimb;
+      set => SetVariable(value, ref _isClimb);
+    }
+
+    [SerializeField] private bool _isFall;
+    public bool IsFall
+    {
+      get => _isFall;
+      set => SetVariable(value, ref _isFall);
+    }
+    
+    private void SetVariable<T>(T value, ref T variable)
+    {
+      _needCheck = !value.Equals(variable);
+      variable = value;
     }
 
     private void Awake()
@@ -87,7 +96,7 @@ namespace SoulRunner.Player
       _animator
         // layer #0  
         .CreateTransition()
-        .From(KelliAnimType.Idle)
+        .From(KelliAnimType.Idle, KelliAnimType.JumpLand)
         .To(KelliAnimType.Run)
         .End(() => IsRun)
         .CreateTransition()
@@ -104,13 +113,20 @@ namespace SoulRunner.Player
         .To(KelliAnimType.Dash)
         .End(() => DashTrigger)
         .AddTransition(KelliAnimType.Run, KelliAnimType.Idle, () => !IsRun)
-        .AddTransition(KelliAnimType.JumpStart, KelliAnimType.JumpIdle, () => true, true)
+        .AddTransition(KelliAnimType.JumpStart, KelliAnimType.JumpIdle, () => IsFall)
         .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.JumpLand, () => !IsJump && !IsCrouch)
         .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.Crouch, () => !IsJump && IsCrouch)
-        .AddTransition(KelliAnimType.JumpLand, KelliAnimType.Idle, () => true, true)
         .AddTransition(KelliAnimType.Crouch, KelliAnimType.Idle, () => !IsCrouch)
         .AddTransition(KelliAnimType.Dash, KelliAnimType.Idle, () => !IsJump, true)
         .AddTransition(KelliAnimType.Dash, KelliAnimType.JumpIdle, () => IsJump, true)
+        .AddTransition(KelliAnimType.Idle, KelliAnimType.Climb, () => IsClimb)
+        .AddTransition(KelliAnimType.Run, KelliAnimType.Climb, () => IsClimb)
+        .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.Climb, () => IsClimb)
+        .AddTransition(KelliAnimType.JumpLand, KelliAnimType.Climb, () => IsClimb)
+        .AddTransition(KelliAnimType.Dash, KelliAnimType.Climb, () => IsClimb)
+        .AddTransition(KelliAnimType.Climb, KelliAnimType.Idle, () => !IsClimb)
+        .AddTransition(KelliAnimType.JumpStart, KelliAnimType.JumpIdle, () => true, true)
+        .AddTransition(KelliAnimType.JumpLand, KelliAnimType.Idle, () => true, true)
 
         // layer #1
         .AddTransition(KelliAnimType.Empty, KelliAnimType.FireLeftHand, () => LeftFireTrigger)
@@ -124,6 +140,24 @@ namespace SoulRunner.Player
     private void Start()
     {
       _animator.StartAnimate();
+    }
+
+    private void Update()
+    {
+      if (_needCheck)
+      {
+        _animator.CheckTransition();
+        _needCheck = false;
+      }
+
+      ClearTriggers();
+    }
+
+    private void ClearTriggers()
+    {
+      _dashTrigger = false;
+      _leftFireTrigger = false;
+      _rightFireTrigger = false;
     }
   }
 }

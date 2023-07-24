@@ -39,13 +39,13 @@ namespace SoulRunner.Utility.Spine
       if (transition == null) return false;
       if (transition.IsHold)
       {
-        // Debug.Log($"Transition now {Current.Animation.Name}");
-        // Debug.Log($"Transition hold {transition.Destination.Animation.Name}");
+        // UnityEngine.Debug.Log($"Transition now {Current.Animation.Name}");
+        // UnityEngine.Debug.Log($"Transition hold from {transition.Destination.Animation.Name}");
         DelayAnimation(transition.Destination);
         return false;
       }
       
-      // Debug.Log($"Transition change {transition.Destination.Animation.Name}");
+      // UnityEngine.Debug.Log($"Transition change {transition.Destination.Animation.Name}");
       ChangeAnimation(transition.Destination);
       return true;
     }
@@ -58,8 +58,8 @@ namespace SoulRunner.Utility.Spine
 
     public void DelayAnimation(SpineAnimationState<TEnum> to)
     {
-      // Debug.Log(Skeleton.state.Tracks.Items[0].Animation.Name);
-      // Debug.Log($"Delay {to.Animation.Name}");
+      // UnityEngine.Debug.Log($"Delay from {Skeleton.state.Tracks.Items[0].Animation.Name}");
+      // UnityEngine.Debug.Log($"Delay to {to.Animation.Name}");
       Next = to;
       Skeleton.state.Complete += OnAnimationCompleted;
     }
@@ -68,8 +68,8 @@ namespace SoulRunner.Utility.Spine
     {
       if (trackEntry.Animation != Current.Animation.Asset.Animation && trackEntry.TrackIndex != Id) return;
       
-      // Debug.Log(trackEntry.Animation.Name);
-      // Debug.Log($"Transition {Next.Animation.Name}");
+      // UnityEngine.Debug.Log($"Complete {trackEntry.Animation.Name}");
+      // UnityEngine.Debug.Log($"Transit to {Next.Animation.Name}");
       ChangeAnimation(Next);
       Skeleton.state.Complete -= OnAnimationCompleted;
     }

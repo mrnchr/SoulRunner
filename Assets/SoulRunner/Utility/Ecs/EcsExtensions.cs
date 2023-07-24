@@ -42,12 +42,20 @@ namespace SoulRunner.Utility.Ecs
 
       return ref obj;
     }
-
+    
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ref T Update<T>(this EcsWorld world, int entity)
+    public static ref T AddSoftly<T>(this EcsWorld world, int entity)
       where T : struct =>
       ref world.Has<T>(entity)
         ? ref world.Get<T>(entity)
         : ref world.Add<T>(entity);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void DelSoftly<T>(this EcsWorld world, int entity)
+      where T : struct
+    {
+      if(world.Has<T>(entity))
+        world.Del<T>(entity);
+    }
   }
 }

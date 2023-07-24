@@ -8,18 +8,20 @@ namespace SoulRunner.Control
   public class InputReader : MonoBehaviour
   {
     private Rewired.Player _player;
-    public Action OnMainAbility;
-    public Action OnDash;
+    public Action<float> OnMove;
+    public Action OnJump;
     public Action OnCrouch;
+    public Action OnClimbUp;
+    public Action OnClimbDown;
     public Action OnFireLeft;
     public Action OnFireRight;
-    public Action OnJump;
-    public Action<float> OnMove;
-    public Action OnNextItem;
-    public Action OnPickUp;
-    public Action OnPrevItem;
+    public Action OnMainAbility;
+    public Action OnDash;
     public Action OnSwapHero;
+    public Action OnPickUp;
     public Action OnUse;
+    public Action OnPrevItem;
+    public Action OnNextItem;
 
     private void Awake()
     {
@@ -29,22 +31,30 @@ namespace SoulRunner.Control
     private void Update()
     {
       OnMove?.Invoke(_player.GetAxis(Idents.InputActions.Horizontal));
-      ReadInput(Idents.InputActions.Jump, OnJump);
-      ReadInput(Idents.InputActions.Crouch, OnCrouch);
-      ReadInput(Idents.InputActions.FireLeft, OnFireLeft);
-      ReadInput(Idents.InputActions.FireRight, OnFireRight);
-      ReadInput(Idents.InputActions.MainAbility, OnMainAbility);
-      ReadInput(Idents.InputActions.SideAbility, OnDash);
-      ReadInput(Idents.InputActions.PickUp, OnPickUp);
-      ReadInput(Idents.InputActions.UseItem, OnUse);
-      ReadInput(Idents.InputActions.SwapHero, OnSwapHero);
-      ReadInput(Idents.InputActions.NextItem, OnNextItem);
-      ReadInput(Idents.InputActions.PrevItem, OnPrevItem);
+      ReadButtonDown(Idents.InputActions.Up, OnJump);
+      ReadButton(Idents.InputActions.Down, OnCrouch);
+      ReadButtonDown(Idents.InputActions.Up, OnClimbUp);
+      ReadButtonDown(Idents.InputActions.Down, OnClimbDown);
+      ReadButton(Idents.InputActions.FireLeft, OnFireLeft);
+      ReadButton(Idents.InputActions.FireRight, OnFireRight);
+      ReadButton(Idents.InputActions.MainAbility, OnMainAbility);
+      ReadButton(Idents.InputActions.SideAbility, OnDash);
+      ReadButton(Idents.InputActions.SwapHero, OnSwapHero);
+      ReadButton(Idents.InputActions.PickUp, OnPickUp);
+      ReadButton(Idents.InputActions.UseItem, OnUse);
+      ReadButton(Idents.InputActions.NextItem, OnNextItem);
+      ReadButton(Idents.InputActions.PrevItem, OnPrevItem);
     }
 
-    private void ReadInput(string inputAction, Action action)
+    private void ReadButton(string inputAction, Action action)
     {
       if (_player.GetButton(inputAction))
+        action?.Invoke();
+    }
+    
+    private void ReadButtonDown(string inputAction, Action action)
+    {
+      if (_player.GetButtonDown(inputAction))
         action?.Invoke();
     }
   }

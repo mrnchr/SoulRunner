@@ -1,4 +1,5 @@
 using System;
+using SoulRunner.Player.ActionMachines;
 using UnityEngine;
 using Zenject;
 
@@ -10,8 +11,9 @@ namespace SoulRunner.Player
     public Action OnGroundExit;
 
     public LayerMask Ground;
-    [HideInInspector] public int Entity;
+    [HideInInspector] public View View;
     
+    [SerializeField] private ActionMachine _machine;  
     private GroundCheckerService _groundCheckerSvc;
 
     [Inject]
@@ -23,13 +25,19 @@ namespace SoulRunner.Player
     private void OnTriggerEnter2D(Collider2D collision)
     {
       if ((collision.gameObject.layer & Ground) > 0)
-        _groundCheckerSvc.OnGroundEnter(Entity);
+      {
+        // _machine.IsOnGround = true;        
+        _groundCheckerSvc.OnGroundEnter(View.Entity);
+      }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-      if ((collision.gameObject.layer & Ground) > 0) 
+      if ((collision.gameObject.layer & Ground) > 0)
+      {
         OnGroundExit?.Invoke();
+        _groundCheckerSvc.OnGroundExit(View.Entity);
+      }
     }
   }
 }
