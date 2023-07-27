@@ -5,7 +5,7 @@ namespace SoulRunner.Player.ActionMachines
   public class PlayerAnimSwitcher : MonoBehaviour
   {
     [SerializeField] private PlayerView _player;
-    private ActionMachine _machine;
+    private KelliActionMachine _machine;
 
     private void Awake()
     {
