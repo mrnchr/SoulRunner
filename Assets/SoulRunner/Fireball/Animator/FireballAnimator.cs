@@ -1,5 +1,5 @@
-﻿using SoulRunner.Configuration.Anim;
-using SoulRunner.Utility.Spine;
+﻿using SoulRunner.Configuration;
+using SoulRunner.Infrastructure.Spine;
 using Spine.Unity;
 using UnityEngine;
 

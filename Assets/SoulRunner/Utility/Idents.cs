@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SoulRunner.Utility
+﻿namespace SoulRunner.Utility
 {
   public static class Idents
   {

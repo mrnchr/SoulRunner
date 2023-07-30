@@ -1,8 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Recipe", menuName = "ScriptableObjects/Recipe", order = 1)]
-public class RecipeScr : ScriptableObject
+namespace SoulRunner.Configuration.Source.Inventory
 {
-  public byte weight;
-  public InventoryItemScr resultItem;
+  [CreateAssetMenu(fileName = "Recipe", menuName = "ScriptableObjects/Recipe", order = 1)]
+  public class RecipeScr : ScriptableObject
+  {
+    public byte weight;
+    public InventoryItemScr resultItem;
+  }
 }

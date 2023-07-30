@@ -12,13 +12,15 @@ GameObject:
   - component: {fileID: 345630074198989056}
   - component: {fileID: 345630074198989071}
   - component: {fileID: 345630074198989070}
+  - component: {fileID: 2965496116829849784}
+  - component: {fileID: 3917108327511158151}
   m_Layer: 6
   m_Name: Shon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &345630074198989069
 Transform:
   m_ObjectHideFlags: 0
@@ -49,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345630074198989068}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -121,6 +123,40 @@ MonoBehaviour:
   _animationName: 
   loop: 0
   timeScale: 1.4
+--- !u!114 &2965496116829849784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630074198989068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7653518d7648f2859f2d0f7e12beff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skeleton: {fileID: 345630074198989070}
+  _currentAnim: 
+  _isRun: 0
+  _isJump: 0
+  _isFall: 0
+  _isCrouch: 0
+  _isClimb: 0
+  _swapTrigger: 0
+  Assets: {fileID: 11400000, guid: da55c7c3d0fbc614dacba54ec4337272, type: 2}
+--- !u!114 &3917108327511158151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630074198989068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f95b7e08ee14913b3f3ce4fe3a91384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 345630075180562087}
 --- !u!1 &345630074562692952
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,9 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ground:
     serializedVersion: 2
-    m_Bits: 2551
-  View: {fileID: 0}
-  _machine: {fileID: 0}
+    m_Bits: 2199
 --- !u!1 &345630075131020877
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +335,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a1309b366e4b818233f175416c5398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  View: {fileID: 0}
+  Ledge:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &345630075180562081
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,8 +350,8 @@ GameObject:
   - component: {fileID: 345630075180562085}
   - component: {fileID: 345630075180562084}
   - component: {fileID: 345630075180562087}
-  - component: {fileID: 675583119293948836}
   - component: {fileID: 2328029380596182816}
+  - component: {fileID: 1240566442328907185}
   m_Layer: 6
   m_Name: Character
   m_TagString: Player
@@ -394,11 +430,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rb: {fileID: 345630075180562085}
-  CurrentAnimator: {fileID: 675583119293948836}
+  ActionMachine: {fileID: 1240566442328907185}
   GroundChecker: {fileID: 345630075055785363}
   LedgeChecker: {fileID: 345630075131020878}
   StayCollider: {fileID: 345630075180562084}
   CrouchCollider: {fileID: 2328029380596182816}
+  PlayerCfg:
+    MoveSpeed: 0
+    JumpForce: 0
+    SwapDelay: 0
+    FireDelay: 0
+    BeforeFireTime: 0
+    DashSpeed: 0
+    DashDuration: 0
+    DashDelay: 0
+  KelliMesh: {fileID: 345630075404894839}
+  KelliAnim: {fileID: 6117525143276216724}
   RightHand: {fileID: 345630075695392324}
   LeftHand: {fileID: 345630074562692953}
   DefaultLayer:
@@ -407,28 +454,8 @@ MonoBehaviour:
   DashLayer:
     serializedVersion: 2
     m_Bits: 1024
-  PlayerCfg:
-    MoveSpeed: 0
-    JumpForce: 0
-    FireDelay: 0
-    FireTime: 0
-    DashSpeed: 0
-    DashDuration: 0
-    DashDelay: 0
---- !u!114 &675583119293948836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345630075180562081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f690d072c2549e9b5db49130512d753, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Skeleton: {fileID: 345630075404894838}
-  Assets: {fileID: 11400000, guid: a86e9d9099cbfdb42a787d0c16a37c96, type: 2}
+  ShonMesh: {fileID: 345630074198989071}
+  ShonAnim: {fileID: 2965496116829849784}
 --- !u!70 &2328029380596182816
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -445,6 +472,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0.78246164, y: 1.0405468}
   m_Size: {x: 0.95149827, y: 1.4910934}
   m_Direction: 0
+--- !u!114 &1240566442328907185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630075180562081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d45719cd3f41108d398d76c1468d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _view: {fileID: 345630075180562087}
 --- !u!1 &345630075404894837
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +497,9 @@ GameObject:
   - component: {fileID: 345630075404894856}
   - component: {fileID: 345630075404894839}
   - component: {fileID: 345630075404894838}
-  - component: {fileID: 345630075404894863}
+  - component: {fileID: 6117525143276216724}
+  - component: {fileID: 4111898744228352664}
+  - component: {fileID: 6987011477031580810}
   m_Layer: 6
   m_Name: Kelli
   m_TagString: Player
@@ -567,7 +609,7 @@ MonoBehaviour:
   _animationName: 
   loop: 0
   timeScale: 1.4
---- !u!114 &345630075404894863
+--- !u!114 &6117525143276216724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,13 +618,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 345630075404894837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f690d072c2549e9b5db49130512d753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boneRoot: {fileID: 0}
-  flipBy180DegreeRotation: 0
-  skeletonRenderer: {fileID: 345630075404894838}
-  skeletonGraphic: {fileID: 0}
+  Skeleton: {fileID: 345630075404894838}
+  _currentAnim: 
+  _isRun: 0
+  _isJump: 0
+  _isFall: 0
+  _isCrouch: 0
+  _isClimb: 0
+  _swapTrigger: 0
+  Assets: {fileID: 11400000, guid: a86e9d9099cbfdb42a787d0c16a37c96, type: 2}
+  _rightFireTrigger: 0
+  _leftFireTrigger: 0
+  _dashTrigger: 0
+--- !u!114 &4111898744228352664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630075404894837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37523d9c28143eca390b960272ef9fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 345630075180562087}
+--- !u!114 &6987011477031580810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630075404894837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabce661f90a4c8f98fde88d65db960c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 345630075180562087}
 --- !u!1 &345630075695392323
 GameObject:
   m_ObjectHideFlags: 0

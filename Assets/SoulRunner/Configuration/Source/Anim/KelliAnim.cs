@@ -1,8 +1,8 @@
+using SoulRunner.Infrastructure.Spine;
 using SoulRunner.Player;
-using SoulRunner.Utility.Spine;
 using UnityEngine;
 
-namespace SoulRunner.Configuration.Anim
+namespace SoulRunner.Configuration
 {
   [CreateAssetMenu(fileName = "Anim", menuName = "SoulRunner/Anim/KelliAnim", order = 1)]
   public class KelliAnim : ScriptableObject

@@ -1,9 +1,9 @@
-﻿using System;
-using Com.LuisPedroFonseca.ProCamera2D;
+﻿using Com.LuisPedroFonseca.ProCamera2D;
+using SoulRunner.Player;
 using UnityEngine;
 using Zenject;
 
-namespace SoulRunner.Player
+namespace SoulRunner
 {
   public class CameraInit : MonoBehaviour
   {

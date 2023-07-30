@@ -1,5 +1,5 @@
 ﻿using System;
-using SoulRunner.Infrastructure;
+using SoulRunner.Configuration;
 using UnityEngine;
 using Zenject;
 

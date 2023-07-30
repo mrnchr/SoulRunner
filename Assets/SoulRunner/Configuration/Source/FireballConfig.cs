@@ -1,4 +1,4 @@
-﻿namespace SoulRunner.Configuration.Source
+﻿namespace SoulRunner.Configuration
 {
   [System.Serializable]
   public class FireballConfig

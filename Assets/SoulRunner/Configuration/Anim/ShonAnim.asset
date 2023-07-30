@@ -12,6 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2a206276f831342a4698c2b77314a7, type: 3}
   m_Name: ShonAnim
   m_EditorClassIdentifier: 
+  Anims:
+  - Name: 1
+    Asset: {fileID: 11400000, guid: f96cf508259dc944a8fad0445b5fd803, type: 2}
+    IsLoop: 1
+  - Name: 3
+    Asset: {fileID: 11400000, guid: cdcb63768619dce48ad0fd30e79c992f, type: 2}
+    IsLoop: 1
+  - Name: 2
+    Asset: {fileID: 11400000, guid: 3944e29a03bae69488b40f85393e58df, type: 2}
+    IsLoop: 1
+  - Name: 0
+    Asset: {fileID: 0}
+    IsLoop: 0
+  - Name: 4
+    Asset: {fileID: 0}
+    IsLoop: 0
+  - Name: 6
+    Asset: {fileID: 0}
+    IsLoop: 0
+  - Name: 7
+    Asset: {fileID: 0}
+    IsLoop: 0
+  - Name: 8
+    Asset: {fileID: 0}
+    IsLoop: 0
+  - Name: 9
+    Asset: {fileID: 0}
+    IsLoop: 0
+  - Name: 10
+    Asset: {fileID: 0}
+    IsLoop: 0
   idle: {fileID: 11400000, guid: f96cf508259dc944a8fad0445b5fd803, type: 2}
   run: {fileID: 11400000, guid: 3944e29a03bae69488b40f85393e58df, type: 2}
   crouch: {fileID: 11400000, guid: cdcb63768619dce48ad0fd30e79c992f, type: 2}

@@ -5,6 +5,7 @@ using System.Linq;
 using CodeStage.AntiCheat.ObscuredTypes;
 using CodeStage.AntiCheat.Storage;
 using Newtonsoft.Json;
+using SoulRunner.Configuration.Source.Inventory;
 
 namespace SR
 {

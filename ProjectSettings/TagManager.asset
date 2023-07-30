@@ -21,8 +21,8 @@ TagManager:
   - EnemyProjectile
   - PlayerDashing
   - Platform
-  - 
-  - 
+  - Ledge
+  - Collectable
   - 
   - 
   - 

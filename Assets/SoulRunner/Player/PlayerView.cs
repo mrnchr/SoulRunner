@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using SoulRunner.Player.Movement;
+using SoulRunner.Configuration;
 using Spine.Unity;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace SoulRunner.Player
@@ -11,13 +9,19 @@ namespace SoulRunner.Player
   public class PlayerView : View
   {
     public Rigidbody2D Rb;
-    // public ActionMachine CurrentMachine;
-    public KelliAnimator CurrentAnimator;
+    public PlayerActionMachine ActionMachine;
     public GroundChecker GroundChecker;
     public LedgeChecker LedgeChecker;
     
     public Collider2D StayCollider;
     public Collider2D CrouchCollider;
+    
+    public PlayerConfig PlayerCfg;
+    public PlayerActionVariables ActionVariables = new PlayerActionVariables();
+
+    [Space, Header("Kelli")] 
+    public MeshRenderer KelliMesh;
+    public KelliAnimator KelliAnim;
     
     public BoneFollower RightHand;
     public BoneFollower LeftHand;
@@ -25,7 +29,9 @@ namespace SoulRunner.Player
     public LayerMask DefaultLayer;
     public LayerMask DashLayer;
 
-    [FormerlySerializedAs("HeroCfg"),HideInInspector] public PlayerConfig PlayerCfg;
+    [Space, Header("Shon")] 
+    public MeshRenderer ShonMesh;
+    public ShonAnimator ShonAnim;
 
     public BoneFollower GetHand(HandType hand) =>
       hand switch
@@ -42,16 +48,9 @@ namespace SoulRunner.Player
       PlayerCfg = playerCfg;
     }
     
-    private void Awake()
-    {
-      GroundChecker.View = this;
-      LedgeChecker.View = this;
-    }
-
     private void Reset()
     {
       TryGetComponent(out Rb);
-      TryGetComponent(out CurrentAnimator);
     }
   }
 }

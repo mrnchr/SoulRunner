@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using SoulRunner.Configuration.Source.Inventory;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;

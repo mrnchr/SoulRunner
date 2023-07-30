@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class InventoryItemScr : ScriptableObject
+namespace SoulRunner.Configuration.Source.Inventory
 {
-  public int id;
-  public string title;
-  public Sprite icon;
-  public byte weight;
-  public byte type;
+  public class InventoryItemScr : ScriptableObject
+  {
+    public int id;
+    public string title;
+    public Sprite icon;
+    public byte weight;
+    public byte type;
+  }
 }

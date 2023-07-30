@@ -1,38 +1,51 @@
 ﻿using System;
+using SoulRunner.LevelManagement;
 using UnityEngine;
-using Zenject;
 
-namespace SoulRunner.Player.Movement
+namespace SoulRunner.Player
 {
-    public class LedgeChecker : MonoBehaviour
+  public class LedgeChecker : MonoBehaviour
+  {
+    public Action<float> OnLedgeEnter;
+    public Action OnLedgeExit;
+
+    public LayerMask Ledge;
+
+    private Collider2D _ledge;
+    private bool _isOnLedge;
+    private bool _wasOnLedge;
+
+    private void FixedUpdate()
     {
+      if (_isOnLedge != _wasOnLedge)
+      {
+        if(_isOnLedge)
+          OnLedgeEnter?.Invoke(_ledge.GetComponent<Ledge>().PosX);
+        else
+          OnLedgeExit?.Invoke();
+      }
 
-        public Action<Transform> OnLedgeEnter;
-        public Action OnLedgeExit;
-        [HideInInspector] public View View;
-
-        private LedgeCheckerService _ledgeCheckerSvc;
-
-        [Inject]
-        public void Construct(LedgeCheckerService ledgeCheckerSvc)
-        {
-            _ledgeCheckerSvc = ledgeCheckerSvc;
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision) {
-            if (collision.CompareTag("Ledge")) {
-                OnLedgeEnter?.Invoke(collision.transform);
-                _ledgeCheckerSvc.OnLedgeEnter(View.Entity, collision.transform.position.x);
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D collision) {
-            if (collision.CompareTag("Ledge")) {
-                OnLedgeExit?.Invoke();
-                _ledgeCheckerSvc.OnLedgeExit(View.Entity);
-            }
-        }
-
+      _wasOnLedge = _isOnLedge;
+      _isOnLedge = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+      if (CheckOnLedge(other.gameObject.layer))
+        _ledge = other;
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+      if (CheckOnLedge(other.gameObject.layer))
+        _ledge = other;
+    }
+
+    private bool CheckOnLedge(int layer)
+    {
+      if (((1 << layer) & Ledge) == 0) return false;
+      _isOnLedge = true;
+      return true;
+    }
+  }
 }

@@ -13,6 +13,7 @@ namespace SoulRunner.Control
     public Action OnCrouch;
     public Action OnClimbUp;
     public Action OnClimbDown;
+    public Action OnGrab;
     public Action OnFireLeft;
     public Action OnFireRight;
     public Action OnMainAbility;
@@ -35,11 +36,12 @@ namespace SoulRunner.Control
       ReadButton(Idents.InputActions.Down, OnCrouch);
       ReadButtonDown(Idents.InputActions.Up, OnClimbUp);
       ReadButtonDown(Idents.InputActions.Down, OnClimbDown);
+      ReadButtonDown(Idents.InputActions.Up, OnGrab);
       ReadButton(Idents.InputActions.FireLeft, OnFireLeft);
       ReadButton(Idents.InputActions.FireRight, OnFireRight);
       ReadButton(Idents.InputActions.MainAbility, OnMainAbility);
       ReadButton(Idents.InputActions.SideAbility, OnDash);
-      ReadButton(Idents.InputActions.SwapHero, OnSwapHero);
+      ReadButtonDown(Idents.InputActions.SwapHero, OnSwapHero);
       ReadButton(Idents.InputActions.PickUp, OnPickUp);
       ReadButton(Idents.InputActions.UseItem, OnUse);
       ReadButton(Idents.InputActions.NextItem, OnNextItem);

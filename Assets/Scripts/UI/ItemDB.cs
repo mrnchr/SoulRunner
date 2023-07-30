@@ -5,6 +5,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 using System.Threading.Tasks;
 using System;
+using SoulRunner.Configuration.Source.Inventory;
 
 public class ItemDB
 {

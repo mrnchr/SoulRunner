@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SoulRunner.Configuration.Source.Inventory;
 using UnityEngine;
 
 namespace SR
