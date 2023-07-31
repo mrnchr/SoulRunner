@@ -1,26 +1,21 @@
 ﻿using SoulRunner.Configuration;
-using SoulRunner.Configuration.Source;
 using SoulRunner.Control;
 using SoulRunner.Fireball;
+using SoulRunner.LevelManagement;
 using SoulRunner.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace SoulRunner.Infrastructure
 {
   public class LocationInstaller : MonoInstaller
   {
-    [SerializeField] private InputReader _input;
-    [SerializeField] private HeroSo _heroSo;
     [SerializeField] private PrefabData _prefabs;
-    [SerializeField] private LevelManagement.Level _level;
-    [SerializeField] private FireballSo _fireballSo;
+    [SerializeField] private Level _level;
 
     public override void InstallBindings()
     {
-      BindHero();
-      BindFireball();
-      
       BindLevel();
       BindInstallerInterfaces();
       
@@ -30,13 +25,7 @@ namespace SoulRunner.Infrastructure
       BindPlayerFactory();
       BindFireballFactory();
       
-      
-      BindInputService();
-    }
-
-    private void BindFireball()
-    {
-      Container.BindInstance(_fireballSo.FireballCfg);
+      BindInputReader();
     }
 
     private void BindFireballFactory()
@@ -80,14 +69,10 @@ namespace SoulRunner.Infrastructure
         .BindInstance(_prefabs)
         .AsSingle();
 
-    private void BindHero() =>
+    private void BindInputReader() =>
       Container
-        .BindInstance(_heroSo.PlayerCfg)
+        .Bind(typeof(InputReader), typeof(ITickable), typeof(IInitializable))
+        .To<InputReader>()
         .AsCached();
-
-    private void BindInputService() =>
-      Container
-        .BindInstance(_input)
-        .AsSingle();
   }
 }

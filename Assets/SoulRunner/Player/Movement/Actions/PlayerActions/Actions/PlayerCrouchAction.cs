@@ -7,7 +7,7 @@ namespace SoulRunner.Player
   {
     protected bool _isCrouchCommand;
 
-    public PlayerCrouchAction(PlayerView view) : base(view)
+    public PlayerCrouchAction(ActionMachine<PlayerView> machine) : base(machine)
     {
     }
 

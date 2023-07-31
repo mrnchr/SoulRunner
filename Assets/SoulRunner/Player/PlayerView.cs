@@ -1,5 +1,6 @@
 ﻿using System;
 using SoulRunner.Configuration;
+using SoulRunner.Infrastructure;
 using Spine.Unity;
 using UnityEngine;
 using Zenject;
@@ -8,18 +9,20 @@ namespace SoulRunner.Player
 {
   public class PlayerView : View
   {
+    public PlayerActionMachine ActiveActionMachine => GetActionMachine(Chars.Hero.Current);
     public Rigidbody2D Rb;
-    public PlayerActionMachine ActionMachine;
     public GroundChecker GroundChecker;
     public LedgeChecker LedgeChecker;
     
     public Collider2D StayCollider;
     public Collider2D CrouchCollider;
-    
-    public PlayerConfig PlayerCfg;
+
+    public PlayerChars Chars;
+    public PlayerSpec Spec;
     public PlayerActionVariables ActionVariables = new PlayerActionVariables();
 
     [Space, Header("Kelli")] 
+    public KelliActionMachine KelliMachine;
     public MeshRenderer KelliMesh;
     public KelliAnimator KelliAnim;
     
@@ -30,6 +33,7 @@ namespace SoulRunner.Player
     public LayerMask DashLayer;
 
     [Space, Header("Shon")] 
+    public ShonActionMachine ShonMachine;
     public MeshRenderer ShonMesh;
     public ShonAnimator ShonAnim;
 
@@ -42,12 +46,20 @@ namespace SoulRunner.Player
         _              => throw new ArgumentOutOfRangeException(nameof(hand), hand, null)
       };
 
+    public PlayerActionMachine GetActionMachine(HeroType hero) =>
+      hero switch
+      {
+        HeroType.Kelli => KelliMachine,
+        HeroType.Shon  => ShonMachine,
+        _              => throw new ArgumentOutOfRangeException(nameof(hero), hero, null)
+      };
+
     [Inject]
-    public void Construct(PlayerConfig playerCfg)
+    public void Construct(ISpecificationService specSvc)
     {
-      PlayerCfg = playerCfg;
+      Spec = specSvc.GetSpec<PlayerSpec>();
     }
-    
+
     private void Reset()
     {
       TryGetComponent(out Rb);

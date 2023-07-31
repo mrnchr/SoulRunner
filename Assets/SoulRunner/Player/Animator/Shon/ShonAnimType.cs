@@ -11,9 +11,10 @@
     RunSwitch = 6,
     JumpStart = 7,
     JumpIdle = 8,
-    JumpLand = 9,
-    Attack = 10,
-    JumpFireStart = 11,
-    JumpFireFinish = 12
+    JumpDown = 9,
+    JumpLand = 10,
+    Attack = 11,
+    JumpFireStart = 12,
+    JumpFireFinish = 13
   }
 }

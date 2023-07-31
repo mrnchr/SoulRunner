@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c89d57ce8514649a9e5f2f1810e8931, type: 3}
+  m_Script: {fileID: 11500000, guid: 04ac3d7f1ebe404eb2375255b4886e79, type: 3}
   m_Name: DefaultPlayer
   m_EditorClassIdentifier: 
-  PlayerCfg:
-    MoveSpeed: 7
-    JumpForce: 25
-    SwapDelay: 0.5
-    FireDelay: 1
-    FireTime: 0.3
-    DashSpeed: 10
-    DashDuration: 0.5
-    DashDelay: 1
+  MoveSpeed: 7
+  JumpForce: 25
+  SwapDelay: 0.5
+  StartHero: 0
+  FireDelay: 1
+  BeforeFireTime: 0.3
+  DashSpeed: 10
+  DashDuration: 0.5
+  DashDelay: 1

@@ -1,6 +1,8 @@
 ﻿using System;
 using SoulRunner.LevelManagement;
+using SoulRunner.Utility;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SoulRunner.Player
 {
@@ -9,7 +11,7 @@ namespace SoulRunner.Player
     public Action<float> OnLedgeEnter;
     public Action OnLedgeExit;
 
-    public LayerMask Ledge;
+    [FormerlySerializedAs("Ledge")] public LayerMask LedgeMask;
 
     private Collider2D _ledge;
     private bool _isOnLedge;
@@ -43,7 +45,7 @@ namespace SoulRunner.Player
 
     private bool CheckOnLedge(int layer)
     {
-      if (((1 << layer) & Ledge) == 0) return false;
+      if (!LedgeMask.Contains(layer)) return false;
       _isOnLedge = true;
       return true;
     }

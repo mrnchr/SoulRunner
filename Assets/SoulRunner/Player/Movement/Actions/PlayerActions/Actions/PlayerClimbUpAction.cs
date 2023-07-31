@@ -4,19 +4,15 @@ namespace SoulRunner.Player
 {
   public class PlayerClimbUpAction : PlayerMovementAction, IClimbUpAction, IStartAction
   {
-    protected readonly PlayerActionMachine _machine;
     protected PlayerJumpAction _jump;
-    protected PlayerClimbAction _climb;
 
-    public PlayerClimbUpAction(PlayerView view) : base(view)
+    public PlayerClimbUpAction(ActionMachine<PlayerView> machine) : base(machine)
     {
-      _machine = _view.ActionMachine;
     }
 
     public virtual void Start()
     {
       _jump = _machine.GetAction<PlayerJumpAction>();
-      _climb = _machine.GetAction<PlayerClimbAction>();
     }
 
     public virtual void ClimbUp()

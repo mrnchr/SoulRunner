@@ -1,14 +1,11 @@
-﻿using SoulRunner.Configuration;
+﻿using SoulRunner.Infrastructure.Actions;
 
 namespace SoulRunner.Player
 {
-  public class PlayerSwapAction : PlayerCycleAction, ISwapAction
+  public class PlayerSwapAction : PlayerMovementAction, ISwapAction
   {
-    protected PlayerConfig _playerCfg;
-
-    public PlayerSwapAction(PlayerView view) : base(view)
+    public PlayerSwapAction(ActionMachine<PlayerView> machine) : base(machine)
     {
-      _playerCfg = view.PlayerCfg;
     }
 
     public virtual void Swap()

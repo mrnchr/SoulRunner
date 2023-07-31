@@ -1,4 +1,6 @@
-﻿namespace SoulRunner.Infrastructure
+﻿using System;
+
+namespace SoulRunner.Infrastructure
 {
   public class Timer : ITimerable
   {

@@ -1,4 +1,5 @@
 ﻿using SoulRunner.Configuration;
+using SoulRunner.Infrastructure.Actions;
 using UnityEngine;
 
 namespace SoulRunner.Player
@@ -6,12 +7,10 @@ namespace SoulRunner.Player
   public class PlayerMoveAction : PlayerMovementAction, IMoveAction
   {
     protected readonly Rigidbody2D _rb;
-    protected readonly PlayerConfig _playerCfg;
     
-    public PlayerMoveAction(PlayerView view) : base(view)
+    public PlayerMoveAction(ActionMachine<PlayerView> machine) : base(machine)
     {
-      _rb = view.Rb;
-      _playerCfg = view.PlayerCfg;
+      _rb = _view.Rb;
     }
     
     public virtual void Move(float direction)
@@ -19,7 +18,7 @@ namespace SoulRunner.Player
       if (_variables.IsCrouching || _variables.IsDashing || _variables.IsClimbing) return;
       
       _view.transform.localScale = SetViewDirection(_view.transform.localScale, direction);
-      _rb.velocity = new Vector2(_playerCfg.MoveSpeed * direction, _rb.velocity.y);
+      _rb.velocity = new Vector2(_chars.MoveSpeed * direction, _rb.velocity.y);
       _variables.OnMove?.Invoke(direction);
     }
     

@@ -1,5 +1,7 @@
 using System;
+using SoulRunner.Utility;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SoulRunner.Player
 {
@@ -8,7 +10,7 @@ namespace SoulRunner.Player
     public Action OnGroundEnter;
     public Action OnGroundExit;
 
-    public LayerMask Ground;
+    [FormerlySerializedAs("Ground")] public LayerMask GroundMask;
 
     private bool _isOnGround;
     private bool _wasOnGround;
@@ -32,7 +34,7 @@ namespace SoulRunner.Player
 
     private void CheckOnGround(int layer)
     {
-      if (((1 << layer) & Ground) > 0)
+      if (GroundMask.Contains(layer))
         _isOnGround = true;
     }
   }

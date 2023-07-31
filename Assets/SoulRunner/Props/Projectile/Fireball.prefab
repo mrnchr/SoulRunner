@@ -13,9 +13,12 @@ GameObject:
   - component: {fileID: 2193438858658110740}
   - component: {fileID: 2193438858658110743}
   - component: {fileID: 1589592944653372640}
+  - component: {fileID: 4003845000925201557}
+  - component: {fileID: 2577031679676645105}
   - component: {fileID: 8432049811608496233}
   - component: {fileID: -2855665856092347954}
   - component: {fileID: 3344511027585178184}
+  - component: {fileID: 6551435864421378812}
   m_Layer: 8
   m_Name: Fireball
   m_TagString: Untagged
@@ -139,6 +142,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rb: {fileID: -2855665856092347954}
   Anim: {fileID: 8432049811608496233}
+  FireballCfg:
+    Speed: 0
+    DeathDuration: 0
+  ObstacleChecker: {fileID: 6551435864421378812}
+  ActionMachine: {fileID: 4003845000925201557}
+  ActionVariables:
+    IsDying: 0
+--- !u!114 &4003845000925201557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193438858658110742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f98c077c91141caa778b67ce450265c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _view: {fileID: 1589592944653372640}
+--- !u!114 &2577031679676645105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193438858658110742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d36d6c8e89f84d979309272bbf0fc415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _view: {fileID: 1589592944653372640}
 --- !u!114 &8432049811608496233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,10 +205,10 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_Material: {fileID: 6200000, guid: 227341616c8e602439fc48b363902e26, type: 2}
+  m_Interpolate: 1
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &3344511027585178184
 CircleCollider2D:
@@ -183,10 +219,25 @@ CircleCollider2D:
   m_GameObject: {fileID: 2193438858658110742}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 227341616c8e602439fc48b363902e26, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.32799998, y: 1.2856}
   serializedVersion: 2
   m_Radius: 0.32
+--- !u!114 &6551435864421378812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193438858658110742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fdc873d34b4f63a6ea5fc485df59bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObstacleMask:
+    serializedVersion: 2
+    m_Bits: 6273

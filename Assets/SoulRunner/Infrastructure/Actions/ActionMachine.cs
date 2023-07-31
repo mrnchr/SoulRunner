@@ -7,7 +7,7 @@ namespace SoulRunner.Infrastructure.Actions
   public class ActionMachine<TView> : MonoBehaviour
   where TView : View
   {
-    [SerializeField] protected TView _view;
+    public TView View;
     protected readonly List<MovementAction<TView>> _actions = new List<MovementAction<TView>>();
 
     public T GetAction<T>() => GetActions<T>()[0];

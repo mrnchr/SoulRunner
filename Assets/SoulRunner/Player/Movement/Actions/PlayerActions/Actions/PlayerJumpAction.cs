@@ -1,17 +1,15 @@
-﻿using SoulRunner.Configuration;
+﻿using SoulRunner.Infrastructure.Actions;
 using UnityEngine;
 
 namespace SoulRunner.Player
 {
-  public class PlayerJumpAction : PlayerCycleAction, IJumpAction
+  public class PlayerJumpAction : PlayerMovementAction, IJumpAction
   {
     protected readonly Rigidbody2D _rb;
-    protected readonly PlayerConfig _playerCfg;
 
-    public PlayerJumpAction(PlayerView view) : base(view)
+    public PlayerJumpAction(ActionMachine<PlayerView> machine) : base(machine)
     {
-      _rb = view.Rb;
-      _playerCfg = view.PlayerCfg;
+      _rb = _view.Rb;
     }
 
     public virtual void Jump()
@@ -24,7 +22,7 @@ namespace SoulRunner.Player
     public virtual void JumpForcefully()
     {
       _rb.velocity = new Vector2(_rb.velocity.x, 0);
-      _rb.AddForce(Vector2.up * _playerCfg.JumpForce, ForceMode2D.Impulse);
+      _rb.AddForce(Vector2.up * _chars.JumpForce, ForceMode2D.Impulse);
 
       _variables.IsOnGround = false;
       _variables.IsJumping = true;

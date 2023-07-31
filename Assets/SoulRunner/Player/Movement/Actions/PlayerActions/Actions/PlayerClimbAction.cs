@@ -1,17 +1,14 @@
-﻿using System;
-using SoulRunner.Infrastructure.Actions;
+﻿using SoulRunner.Infrastructure.Actions;
 using UnityEngine;
 
 namespace SoulRunner.Player
 {
   public class PlayerClimbAction : PlayerMovementAction, IClimbAction, IStartAction, IUpdateAction
   {
-    protected readonly PlayerActionMachine _machine;
     protected ILandAction _land;
 
-    public PlayerClimbAction(PlayerView view) : base(view)
+    public PlayerClimbAction(ActionMachine<PlayerView> machine) : base(machine)
     {
-      _machine = view.ActionMachine;
     }
 
     public virtual void Start()
@@ -53,7 +50,7 @@ namespace SoulRunner.Player
       _variables.IsClimbing = true;
       _variables.OnClimbStart?.Invoke();
     }
-    
+
     protected virtual void GlueToLedge(float posX)
     {
       Vector3 pos = _view.transform.position;

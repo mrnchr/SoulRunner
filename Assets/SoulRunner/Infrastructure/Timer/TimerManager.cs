@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace SoulRunner.Infrastructure
 {
-  public sealed class TimerManager : MonoBehaviour
+  public sealed class TimerManager : IFixedTickable
   {
-    private static readonly List<ITimerable> _timers = new List<ITimerable>();
-
     public static void AddTimer(ITimerable elem) => _timers.Add(elem);
     public static void RemoveTimer(ITimerable elem) => _timers.Remove(elem);
 
-    private void FixedUpdate()
+    private static readonly List<ITimerable> _timers = new List<ITimerable>();
+    
+    public void FixedTick()
     {
       foreach (ITimerable timer in _timers.ToArray())
       {

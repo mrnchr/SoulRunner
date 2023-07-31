@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 345630074198989056}
   - component: {fileID: 345630074198989071}
   - component: {fileID: 345630074198989070}
+  - component: {fileID: 1229266092016247682}
   - component: {fileID: 2965496116829849784}
   - component: {fileID: 3917108327511158151}
   m_Layer: 6
@@ -123,6 +124,19 @@ MonoBehaviour:
   _animationName: 
   loop: 0
   timeScale: 1.4
+--- !u!114 &1229266092016247682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630074198989068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f7ec7e8ccf4a64967f4abdab3f7d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  View: {fileID: 345630075180562087}
 --- !u!114 &2965496116829849784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bca3e64b5b9004aa3ae7d7b75772f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ground:
+  GroundMask:
     serializedVersion: 2
     m_Bits: 2199
 --- !u!1 &345630075131020877
@@ -335,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a1309b366e4b818233f175416c5398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ledge:
+  LedgeMask:
     serializedVersion: 2
     m_Bits: 4096
 --- !u!1 &345630075180562081
@@ -350,8 +364,9 @@ GameObject:
   - component: {fileID: 345630075180562085}
   - component: {fileID: 345630075180562084}
   - component: {fileID: 345630075180562087}
+  - component: {fileID: 7556593061551240022}
   - component: {fileID: 2328029380596182816}
-  - component: {fileID: 1240566442328907185}
+  - component: {fileID: 694927375609592204}
   m_Layer: 6
   m_Name: Character
   m_TagString: Player
@@ -430,20 +445,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rb: {fileID: 345630075180562085}
-  ActionMachine: {fileID: 1240566442328907185}
   GroundChecker: {fileID: 345630075055785363}
   LedgeChecker: {fileID: 345630075131020878}
   StayCollider: {fileID: 345630075180562084}
   CrouchCollider: {fileID: 2328029380596182816}
-  PlayerCfg:
-    MoveSpeed: 0
-    JumpForce: 0
-    SwapDelay: 0
-    FireDelay: 0
-    BeforeFireTime: 0
-    DashSpeed: 0
-    DashDuration: 0
-    DashDelay: 0
+  Chars: {fileID: 7556593061551240022}
+  Spec: {fileID: 0}
+  ActionVariables:
+    IsOnGround: 0
+    IsOnLedge: 0
+    LedgePosX: 0
+    IsJumping: 0
+    IsCrouching: 0
+    IsFiring: 0
+    IsClimbing: 0
+    IsFalling: 0
+    IsDashing: 0
+    NextHand: 0
+    CanAirJump: 0
+  KelliMachine: {fileID: 4690008499667833845}
   KelliMesh: {fileID: 345630075404894839}
   KelliAnim: {fileID: 6117525143276216724}
   RightHand: {fileID: 345630075695392324}
@@ -454,8 +474,21 @@ MonoBehaviour:
   DashLayer:
     serializedVersion: 2
     m_Bits: 1024
+  ShonMachine: {fileID: 1229266092016247682}
   ShonMesh: {fileID: 345630074198989071}
   ShonAnim: {fileID: 2965496116829849784}
+--- !u!114 &7556593061551240022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630075180562081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6393b4055ec0479d9fa66077432938a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!70 &2328029380596182816
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -472,7 +505,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.78246164, y: 1.0405468}
   m_Size: {x: 0.95149827, y: 1.4910934}
   m_Direction: 0
---- !u!114 &1240566442328907185
+--- !u!114 &694927375609592204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -481,10 +514,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 345630075180562081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2d45719cd3f41108d398d76c1468d39, type: 3}
+  m_Script: {fileID: 11500000, guid: cdd105512cc445649882b81fb8f4e149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 345630075180562087}
+  _player: {fileID: 345630075180562087}
 --- !u!1 &345630075404894837
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +530,7 @@ GameObject:
   - component: {fileID: 345630075404894856}
   - component: {fileID: 345630075404894839}
   - component: {fileID: 345630075404894838}
+  - component: {fileID: 4690008499667833845}
   - component: {fileID: 6117525143276216724}
   - component: {fileID: 4111898744228352664}
   - component: {fileID: 6987011477031580810}
@@ -609,6 +643,19 @@ MonoBehaviour:
   _animationName: 
   loop: 0
   timeScale: 1.4
+--- !u!114 &4690008499667833845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630075404894837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f360a88facb49ab86122a69ceec2c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  View: {fileID: 345630075180562087}
 --- !u!114 &6117525143276216724
 MonoBehaviour:
   m_ObjectHideFlags: 0

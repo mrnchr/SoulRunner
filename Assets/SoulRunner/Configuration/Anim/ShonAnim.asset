@@ -32,16 +32,16 @@ MonoBehaviour:
     Asset: {fileID: 0}
     IsLoop: 0
   - Name: 7
-    Asset: {fileID: 0}
+    Asset: {fileID: 11400000, guid: 9ce7af1b95b3218498a3519bdf966152, type: 2}
     IsLoop: 0
   - Name: 8
-    Asset: {fileID: 0}
+    Asset: {fileID: 11400000, guid: 673b4dddce68ab84795dbb039c30501e, type: 2}
     IsLoop: 0
   - Name: 9
-    Asset: {fileID: 0}
+    Asset: {fileID: 11400000, guid: 9ef9b546cf7f56e44a74b9704d7a64b1, type: 2}
     IsLoop: 0
   - Name: 10
-    Asset: {fileID: 0}
+    Asset: {fileID: 11400000, guid: 2fc445fbc05934c4cb8e90df4ea59ac1, type: 2}
     IsLoop: 0
   idle: {fileID: 11400000, guid: f96cf508259dc944a8fad0445b5fd803, type: 2}
   run: {fileID: 11400000, guid: 3944e29a03bae69488b40f85393e58df, type: 2}

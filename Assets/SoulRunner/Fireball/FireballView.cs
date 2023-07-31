@@ -1,6 +1,5 @@
 ﻿using SoulRunner.Configuration;
-using SoulRunner.Configuration.Source;
-using SoulRunner.Player;
+using SoulRunner.Infrastructure;
 using UnityEngine;
 using Zenject;
 
@@ -11,11 +10,14 @@ namespace SoulRunner.Fireball
     public Rigidbody2D Rb;
     public FireballAnimator Anim;
     public FireballConfig FireballCfg;
+    public ObstacleChecker ObstacleChecker;
+    public FireballActionMachine ActionMachine;
+    public FireballActionVariables ActionVariables;
 
     [Inject]
-    public void Construct(FireballConfig fireballCfg)
+    public void Construct(IConfigService configSvc)
     {
-      FireballCfg = fireballCfg;
+      FireballCfg = configSvc.GetConfig<FireballConfig>();
     }
     
     private void Reset()

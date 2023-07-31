@@ -5,19 +5,15 @@ using UnityEngine;
 
 namespace SoulRunner.Fireball
 {
-  public class FireballAnimator : MonoBehaviour
+  public class FireballAnimator : MonoSpineAnimator<FireballAnimType>
   {
-    public SkeletonAnimation Skeleton;
     public FireballAnim Assets;
 
-    private SpineAnimator<FireballAnimType> _animator;
-    private bool _isDead;
-
-
-    public bool IsDead
+    private bool _deathTrigger;
+    public bool DeathTrigger
     {
-      get => _isDead;
-      set => _animator.SetVariable(value, ref _isDead);
+      get => _deathTrigger;
+      set => _animator.SetVariable(value, ref _deathTrigger);
     }
 
     private void Awake()
@@ -26,12 +22,12 @@ namespace SoulRunner.Fireball
 
       _animator
         .AddTransition(FireballAnimType.Spawn, FireballAnimType.Idle, () => true, true)
-        .AddTransition(FireballAnimType.Idle, FireballAnimType.Death, () => IsDead);
+        .AddTransition(FireballAnimType.Idle, FireballAnimType.Death, () => DeathTrigger);
     }
 
-    private void Start()
+    protected override void ClearTriggers()
     {
-      _animator.StartAnimate();
+      _deathTrigger = false;
     }
   }
 }

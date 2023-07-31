@@ -2,12 +2,12 @@
 using Rewired;
 using SoulRunner.Utility;
 using UnityEngine;
+using Zenject;
 
 namespace SoulRunner.Control
 {
-  public class InputReader : MonoBehaviour
+  public class InputReader : IInitializable, ITickable
   {
-    private Rewired.Player _player;
     public Action<float> OnMove;
     public Action OnJump;
     public Action OnCrouch;
@@ -24,12 +24,14 @@ namespace SoulRunner.Control
     public Action OnPrevItem;
     public Action OnNextItem;
 
-    private void Awake()
+    private Rewired.Player _player;
+
+    public void Initialize()
     {
       _player = ReInput.players.GetPlayer(0);
     }
 
-    private void Update()
+    public void Tick()
     {
       OnMove?.Invoke(_player.GetAxis(Idents.InputActions.Horizontal));
       ReadButtonDown(Idents.InputActions.Up, OnJump);
@@ -53,7 +55,7 @@ namespace SoulRunner.Control
       if (_player.GetButton(inputAction))
         action?.Invoke();
     }
-    
+
     private void ReadButtonDown(string inputAction, Action action)
     {
       if (_player.GetButtonDown(inputAction))

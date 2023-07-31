@@ -1,23 +1,20 @@
 ﻿using System;
-using SoulRunner.Configuration;
 using SoulRunner.Infrastructure;
 using SoulRunner.Infrastructure.Actions;
 
 namespace SoulRunner.Player
 {
-  public class KelliFireAction : PlayerCycleAction, IFireAction, IUpdateAction, IKelliAction
+  public class KelliFireAction : PlayerMovementAction, IFireAction, IUpdateAction, IKelliAction
   {
-    private readonly PlayerConfig _playerCfg;
     private HandType _fireHand;
 
-    public KelliFireAction(PlayerView view) : base(view)
+    public KelliFireAction(ActionMachine<PlayerView> machine) : base(machine)
     {
-      _playerCfg = view.PlayerCfg;
     }
 
     public void Fire(HandType hand)
     {
-      if (!IsActive || _variables.FireDelay > 0 || _variables.IsDashing) return;
+      if (!IsActive || _chars.FireDelay.Current > 0 || _variables.IsDashing) return;
 
       if (_variables.IsClimbing)
       {
@@ -36,8 +33,8 @@ namespace SoulRunner.Player
       _variables.IsFiring = true;
       _fireHand = hand;
       _variables.OnFireStart?.Invoke(_fireHand);
-      TimerManager.AddTimer(_variables.BeforeFire = _playerCfg.BeforeFireTime);
-      TimerManager.AddTimer(_variables.FireDelay = _playerCfg.FireDelay);
+      TimerManager.AddTimer(_variables.BeforeFire = _spec.BeforeFireTime);
+      TimerManager.AddTimer(_chars.FireDelay.Current = _chars.FireDelay.Max);
     }
 
     public void Update()
@@ -53,6 +50,7 @@ namespace SoulRunner.Player
     {
       base.Deactivate();
       _variables.IsFiring = false;
+      TimerManager.RemoveTimer(_variables.BeforeFire);
     }
 
     private HandType GetNextHand(HandType hand) =>

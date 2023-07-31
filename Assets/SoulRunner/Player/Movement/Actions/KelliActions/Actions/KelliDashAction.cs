@@ -6,28 +6,26 @@ using UnityEngine;
 
 namespace SoulRunner.Player
 {
-  public class KelliDashAction : PlayerCycleAction, IDashAction, IUpdateAction, IKelliAction
+  public class KelliDashAction : PlayerMovementAction, IDashAction, IUpdateAction, IKelliAction
   {
-    private readonly PlayerConfig _playerCfg;
     private Timer _dashHold = 0;
 
-    public KelliDashAction(PlayerView view) : base(view)
+    public KelliDashAction(ActionMachine<PlayerView> machine) : base(machine)
     {
-      _playerCfg = _view.PlayerCfg;
     }
 
     public void Dash()
     {
-      if (!IsActive || _variables.DashDelay > 0 || _variables.IsCrouching || _variables.IsClimbing) return;
+      if (!IsActive || _chars.DashDelay.Current > 0 || _variables.IsCrouching || _variables.IsClimbing) return;
       
       _view.gameObject.layer = _view.DashLayer.GetLayerIndex();
       _view.Rb.gravityScale = 0;
-      _view.Rb.velocity = Vector2.right * (_view.transform.localScale.x * _playerCfg.DashSpeed);
+      _view.Rb.velocity = Vector2.right * (_view.transform.localScale.x * _chars.DashSpeed);
 
       _variables.IsDashing = true;
       _variables.OnDashStart?.Invoke();
-      TimerManager.AddTimer(_dashHold = _playerCfg.DashDuration);
-      TimerManager.AddTimer(_variables.DashDelay = _playerCfg.DashDelay);
+      TimerManager.AddTimer(_dashHold = _spec.DashDuration);
+      TimerManager.AddTimer(_chars.DashDelay.Current = _chars.DashDelay.Max);
     }
 
     public void StopDashing()

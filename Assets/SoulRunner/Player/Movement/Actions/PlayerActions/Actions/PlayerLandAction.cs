@@ -4,7 +4,7 @@ namespace SoulRunner.Player
 {
   public class PlayerLandAction : PlayerMovementAction, ILandAction
   {
-    public PlayerLandAction(PlayerView view) : base(view)
+    public PlayerLandAction(ActionMachine<PlayerView> machine) : base(machine)
     {
     }
 

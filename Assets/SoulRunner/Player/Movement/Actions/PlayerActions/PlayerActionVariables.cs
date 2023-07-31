@@ -22,20 +22,21 @@ namespace SoulRunner.Player
     public Action<HandType> OnFireStart;
     public Action<HandType> OnFire;
 
-    public HeroType ActiveHero;
+    public Action OnAirJump;
+
     public bool IsOnGround;
     public bool IsOnLedge;
     public float LedgePosX;
     public bool IsJumping;
     public bool IsCrouching;
-    public bool IsDashing;
     public bool IsFiring;
     public bool IsClimbing;
     public bool IsFalling;
+    
+    public bool IsDashing;
     public HandType NextHand;
     public Timer BeforeFire = 0;
-    public Timer FireDelay = 0;
-    public Timer DashDelay = 0;
-    public Timer SwapDelay = 0;
+
+    public bool CanAirJump;
   }
 }
