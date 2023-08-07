@@ -1,4 +1,5 @@
 ﻿using System;
+using SoulRunner.Infrastructure;
 
 namespace SoulRunner.Player
 {
@@ -10,6 +11,8 @@ namespace SoulRunner.Player
       
       _variables.OnDashStart += AnimateDash;
       _variables.OnFireStart += AnimateFire;
+      _variables.OnAttackInJumpStart += AnimateAttackInJumpStart;
+      _variables.OnAttackStart += AnimateAttackEnd;
     }
 
     protected override void Deactivate()
@@ -25,7 +28,7 @@ namespace SoulRunner.Player
     protected override void AnimateCrouch(bool isCrouch) => _player.KelliAnim.IsCrouch = isCrouch;
     protected override void AnimateClimb(bool isClimb) => _player.KelliAnim.IsClimb = isClimb;
     protected override void AnimateFall(bool isFall) => _player.KelliAnim.IsFall = isFall;
-    protected override void AnimateSwap(HeroType _) => _player.KelliAnim.SwapTrigger = true;
+    protected override void AnimateSwap(ObjectType _) => _player.KelliAnim.SwapTrigger = true;
 
     private void AnimateFire(HandType fireHand)
     {
@@ -44,5 +47,12 @@ namespace SoulRunner.Player
     }
 
     private void AnimateDash() => _player.KelliAnim.DashTrigger = true;
+    private void AnimateAttackInJumpStart() => _player.KelliAnim.IsAttack = true;
+
+    private void AnimateAttackEnd()
+    {
+      _player.KelliAnim.IsAttack = false;
+      _player.KelliAnim.AttackTrigger = true;
+    }
   }
 }

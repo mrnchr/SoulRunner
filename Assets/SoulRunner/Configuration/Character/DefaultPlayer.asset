@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ac3d7f1ebe404eb2375255b4886e79, type: 3}
   m_Name: DefaultPlayer
   m_EditorClassIdentifier: 
+  Health: 100
+  BaseDamage: 10
+  BaseAttackRatio: 1
   MoveSpeed: 7
   JumpForce: 25
   SwapDelay: 0.5
-  StartHero: 0
+  StartHero: 1
   FireDelay: 1
-  BeforeFireTime: 0.3
+  FireballSpeed: 10
   DashSpeed: 10
-  DashDuration: 0.5
   DashDelay: 1
+  KelliAttackDelay: 3
+  KelliAttackRatio: 1
+  ShonAttackRatio: 1.5

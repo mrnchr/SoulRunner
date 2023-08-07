@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
@@ -26,7 +27,7 @@ namespace SoulRunner.Infrastructure.Spine
     {
       Current = to;
       if (CheckTransition()) return;
-      // UnityEngine.Debug.Log($"Change to {Current.Animation.Name}");
+      // UnityEngine.Debug.Log($"{typeof(TEnum)} Change to {Current.Animation.Name}");
       if (Current.Animation.Asset)
         Skeleton.state.SetAnimation(Id, Current.Animation.Asset, Current.Animation.IsLoop);
       else
@@ -41,13 +42,13 @@ namespace SoulRunner.Infrastructure.Spine
       if (transition == null) return false;
       if (transition.IsHold)
       {
-        // UnityEngine.Debug.Log($"Transition now {Current.Animation.Name}");
-        // UnityEngine.Debug.Log($"Transition hold from {transition.Destination.Animation.Name}");
+        // UnityEngine.Debug.Log($"{typeof(TEnum)} Transition now {Current.Animation.Name}");
+        // UnityEngine.Debug.Log($"{typeof(TEnum)} Transition hold from {transition.Destination.Animation.Name}");
         DelayAnimation(transition.Destination);
         return false;
       }
       
-      // UnityEngine.Debug.Log($"Transition change {transition.Destination.Animation.Name}");
+      // UnityEngine.Debug.Log($"{typeof(TEnum)} Transition change {transition.Destination.Animation.Name}");
       ChangeAnimation(transition.Destination);
       return true;
     }
@@ -60,30 +61,20 @@ namespace SoulRunner.Infrastructure.Spine
 
     public void DelayAnimation(SpineAnimationState<TEnum> to)
     {
-      // UnityEngine.Debug.Log($"Delay from {Skeleton.state.Tracks.Items[0].Animation.Name}");
-      // UnityEngine.Debug.Log($"Delay to {to.Animation.Name}");
+      // UnityEngine.Debug.Log($"{typeof(TEnum)} Delay from {Skeleton.state.Tracks.Items[0].Animation.Name}");
+      // UnityEngine.Debug.Log($"{typeof(TEnum)} Delay to {to.Animation.Name}");
       Next = to;
       Skeleton.state.Complete += OnAnimationCompleted;
     }
 
     public void OnAnimationCompleted(TrackEntry trackEntry)
     {
-      if (trackEntry.Animation != Current.Animation.Asset.Animation && trackEntry.TrackIndex != Id) return;
+      if (trackEntry.Animation != Current.Animation.Asset.Animation || trackEntry.TrackIndex != Id) return;
       
-      // UnityEngine.Debug.Log($"Complete {trackEntry.Animation.Name}");
-      // UnityEngine.Debug.Log($"Transit to {Next.Animation.Name}");
+      // UnityEngine.Debug.Log($"{typeof(TEnum)} Complete {trackEntry.Animation.Name}");
+      // UnityEngine.Debug.Log($"{typeof(TEnum)} Transit to {Next.Animation.Name}");
       ChangeAnimation(Next);
       Skeleton.state.Complete -= OnAnimationCompleted;
     }
-    
-    // private bool CheckTransitionWithoutDelay()
-    // {
-    //   ClearNext();
-    //   var transition = Current?.FindFirstCompletedCondition();
-    //   if (transition == null) return false;
-    //   
-    //   ChangeAnimation(transition.Destination);
-    //   return true;
-    // }
   }
 }

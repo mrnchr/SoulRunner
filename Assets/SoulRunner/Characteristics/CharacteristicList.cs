@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SoulRunner.Configuration;
+using SoulRunner.Infrastructure;
 using UnityEngine;
+using Zenject;
 
 namespace SoulRunner.Characteristics
 {
@@ -11,21 +13,29 @@ namespace SoulRunner.Characteristics
     protected TConfig _config;
     protected readonly List<ICharacteristic> _chars = new List<ICharacteristic>();
 
+    [Inject]
+    public void Construct(IConfigurationService configSvc)
+    {
+      FillChars();
+      SetConfig(configSvc.GetConfig<TConfig>());
+    }
+
+    public virtual List<ICharacteristic> GetChars() => _chars;
     public virtual CharMask<TChar> GetChars<TChar>()
       where TChar : ICharacteristic =>
-      new CharMask<TChar>(_chars.OfType<TChar>());
+      new CharMask<TChar>(_chars);
+
+    public void ResetChars()
+    {
+      foreach (ICharacteristic defaultChar in _chars)
+        defaultChar.Init();
+    }
 
     protected void SetConfig(TConfig config)
     {
       _config = config;
       SetChars();
       ResetChars();
-    }
-    
-    public void ResetChars()
-    {
-      foreach (IDefaultChar defaultChar in _chars.OfType<IDefaultChar>())
-        defaultChar.ToDefault();
     }
 
     protected abstract void FillChars();

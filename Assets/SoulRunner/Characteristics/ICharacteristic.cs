@@ -2,5 +2,6 @@
 {
   public interface ICharacteristic
   {
+    public void Init();
   }
 }

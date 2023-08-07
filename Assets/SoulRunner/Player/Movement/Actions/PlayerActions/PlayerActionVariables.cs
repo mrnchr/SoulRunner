@@ -15,12 +15,16 @@ namespace SoulRunner.Player
     public Action OnCrouchEnd;
     public Action OnClimbStart;
     public Action OnClimbEnd;
-    public Action<HeroType> OnSwap;
+    public Action<ObjectType> OnSwap;
 
     public Action OnDashStart;
     public Action OnDashEnd;
     public Action<HandType> OnFireStart;
     public Action<HandType> OnFire;
+    public Action OnAttackInJumpStart;
+    public Action OnAttackInJumpEnd;
+    public Action OnAttackStart;
+    public Action OnAttackEnd;
 
     public Action OnAirJump;
 
@@ -34,8 +38,9 @@ namespace SoulRunner.Player
     public bool IsFalling;
     
     public bool IsDashing;
+    public bool IsAttackInJump;
+    public bool IsAttacking;
     public HandType NextHand;
-    public Timer BeforeFire = 0;
 
     public bool CanAirJump;
   }

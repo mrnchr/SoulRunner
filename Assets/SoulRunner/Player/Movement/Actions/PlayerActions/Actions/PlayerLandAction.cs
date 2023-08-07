@@ -10,6 +10,7 @@ namespace SoulRunner.Player
 
     public virtual void Land()
     {
+      if (!IsActive) return;
       if (_variables.IsJumping)
       {
         _variables.IsJumping = false;

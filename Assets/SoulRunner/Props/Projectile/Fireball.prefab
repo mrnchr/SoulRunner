@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -2855665856092347954}
   - component: {fileID: 3344511027585178184}
   - component: {fileID: 6551435864421378812}
+  - component: {fileID: 427447918283488735}
   m_Layer: 8
   m_Name: Fireball
   m_TagString: Untagged
@@ -140,15 +141,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87422ca156644832b022a76d22968cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 101
   Rb: {fileID: -2855665856092347954}
   Anim: {fileID: 8432049811608496233}
-  FireballCfg:
-    Speed: 0
-    DeathDuration: 0
   ObstacleChecker: {fileID: 6551435864421378812}
   ActionMachine: {fileID: 4003845000925201557}
   ActionVariables:
     IsDying: 0
+  Weapon: {fileID: 427447918283488735}
+  Spec: {fileID: 0}
 --- !u!114 &4003845000925201557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f98c077c91141caa778b67ce450265c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 1589592944653372640}
+  View: {fileID: 1589592944653372640}
 --- !u!114 &2577031679676645105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,3 +242,17 @@ MonoBehaviour:
   ObstacleMask:
     serializedVersion: 2
     m_Bits: 6273
+--- !u!114 &427447918283488735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2193438858658110742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6202166ab71f4b5488fe5ecda80d9289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Owner: {fileID: 1589592944653372640}
+  AttackPoints: 0

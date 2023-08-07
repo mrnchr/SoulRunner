@@ -1,4 +1,6 @@
 ﻿using SoulRunner.Fireball;
+using SoulRunner.Infrastructure;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +9,7 @@ namespace SoulRunner.Player
   public class FireSystem : MonoBehaviour
   {
     [SerializeField] private PlayerView _player;
+    [SerializeField] private AttackSystem _attackSys;
     private IFireballFactory _fireballFactory;
 
     [Inject]
@@ -23,7 +26,9 @@ namespace SoulRunner.Player
       
       FireballView fireballView = _fireballFactory.Create(handPos);
       fireballView.transform.localScale = new Vector3(direction, 1, 1);
-      fireballView.Rb.velocity = Vector2.right * (direction * fireballView.FireballCfg.Speed);
+      fireballView.Rb.velocity = Vector2.right * (direction * _player.Chars.FireballSpeed);
+      fireballView.Weapon.Owner = _player;
+      fireballView.Weapon.AttackPoints = _attackSys.GetDamagePoints();
     }
 
     private void OnEnable()

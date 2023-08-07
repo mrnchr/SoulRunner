@@ -2817,10 +2817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338c231c976f4bba870ef528d4d2a050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroSo: {fileID: 11400000, guid: 794d02524e79f2646903117050953d7b, type: 2}
   _prefabs: {fileID: 11400000, guid: 4e547da04a66ad0468bd7eee385c8add, type: 2}
   _level: {fileID: 420525982}
-  _fireballSo: {fileID: 11400000, guid: 174b268d130b6a24da9c37258a16cc73, type: 2}
 --- !u!114 &558175071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9152,7 +9150,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 114
+        _keyboardKeyCode: 32
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
@@ -9218,7 +9216,7 @@ MonoBehaviour:
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
-        _keyboardKeyCode: 32
+        _keyboardKeyCode: 114
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0

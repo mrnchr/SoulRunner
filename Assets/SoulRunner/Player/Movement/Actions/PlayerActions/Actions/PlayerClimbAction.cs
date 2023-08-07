@@ -18,7 +18,7 @@ namespace SoulRunner.Player
 
     public virtual void Climb()
     {
-      if (!_variables.IsOnLedge) return;
+      if (!IsActive || !_variables.IsOnLedge || _variables.IsAttacking) return;
       if (_variables.IsFalling)
       {
         _land.Land();
@@ -28,7 +28,7 @@ namespace SoulRunner.Player
 
     public virtual void Update()
     {
-      if (!_variables.IsOnLedge) return;
+      if (!IsActive || !_variables.IsOnLedge || _variables.IsAttacking) return;
       if (!_variables.IsClimbing && !_variables.IsCrouching && !_variables.IsJumping && !_variables.IsFalling && !_variables.IsDashing)
       {
         StartClimb();

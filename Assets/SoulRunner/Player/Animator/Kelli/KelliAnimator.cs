@@ -29,9 +29,23 @@ namespace SoulRunner.Player
       set => SetVariable(value, ref _leftFireTrigger);
     }
 
+    public bool IsAttack
+    {
+      get => _isAttack;
+      set => SetVariable(value, ref _isAttack);
+    }
+
+    public bool AttackTrigger
+    {
+      private get => _attackTrigger;
+      set => SetVariable(value, ref _attackTrigger);
+    }
+
     [SerializeField] private bool _rightFireTrigger;
     [SerializeField] private bool _leftFireTrigger;
     [SerializeField] private bool _dashTrigger;
+    [SerializeField] private bool _isAttack;
+    [SerializeField] private bool _attackTrigger;
 
     private void Awake()
     {
@@ -58,7 +72,7 @@ namespace SoulRunner.Player
         .CreateTransition()
         .From(KelliAnimType.Idle, KelliAnimType.Run)
         .To(KelliAnimType.JumpStart)
-        .End(() => IsJump)
+        .End(() => IsJump || IsFall)
         .CreateTransition()
         .From(KelliAnimType.Idle, KelliAnimType.Run)
         .To(KelliAnimType.Crouch)
@@ -70,9 +84,9 @@ namespace SoulRunner.Player
         .End(() => DashTrigger)
         .AddTransition(KelliAnimType.Run, KelliAnimType.Idle, () => !IsRun)
         .AddTransition(KelliAnimType.JumpStart, KelliAnimType.JumpIdle, () => IsFall)
-        .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.JumpLand, () => !IsJump && !IsCrouch)
-        .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.Crouch, () => !IsJump && IsCrouch)
-        .AddTransition(KelliAnimType.JumpLand, KelliAnimType.JumpIdle, () => IsJump)
+        .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.JumpLand, () => !IsJump && !IsFall && !IsCrouch)
+        .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.Crouch, () => !IsJump && !IsFall && IsCrouch)
+        .AddTransition(KelliAnimType.JumpLand, KelliAnimType.JumpIdle, () => IsJump || IsFall)
         .AddTransition(KelliAnimType.Crouch, KelliAnimType.Idle, () => !IsCrouch)
         .AddTransition(KelliAnimType.Dash, KelliAnimType.Idle, () => !IsJump, true)
         .AddTransition(KelliAnimType.Dash, KelliAnimType.JumpIdle, () => IsJump, true)
@@ -82,6 +96,9 @@ namespace SoulRunner.Player
         .AddTransition(KelliAnimType.JumpLand, KelliAnimType.Climb, () => IsClimb)
         .AddTransition(KelliAnimType.Dash, KelliAnimType.Climb, () => IsClimb)
         .AddTransition(KelliAnimType.Climb, KelliAnimType.Idle, () => !IsClimb)
+        .AddTransition(KelliAnimType.JumpIdle, KelliAnimType.JumpFireStart, () => IsFall && IsAttack)
+        .AddTransition(KelliAnimType.JumpFireStart, KelliAnimType.JumpFireFinish, () => AttackTrigger)
+        .AddTransition(KelliAnimType.JumpFireFinish, KelliAnimType.Idle, () => true, true)
         .AddTransition(KelliAnimType.JumpStart, KelliAnimType.JumpIdle, () => true, true)
         .AddTransition(KelliAnimType.JumpLand, KelliAnimType.Idle, () => true, true)
         
@@ -102,6 +119,7 @@ namespace SoulRunner.Player
       _dashTrigger = false;
       _leftFireTrigger = false;
       _rightFireTrigger = false;
+      _attackTrigger = false;
     }
   }
 }

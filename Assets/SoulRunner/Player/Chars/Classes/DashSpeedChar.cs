@@ -4,7 +4,7 @@ using SoulRunner.Characteristics;
 namespace SoulRunner.Player
 {
   [Serializable]
-  public class DashSpeedChar : Characteristic<float>, IKelliChar
+  public class DashSpeedChar : SimpleChar<float>
   {
   }
 }

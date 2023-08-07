@@ -1,20 +1,11 @@
-﻿using UnityEngine;
+﻿using SoulRunner.Characteristics;
+using UnityEngine;
 
-namespace SoulRunner
+namespace SoulRunner.Infrastructure
 {
   public abstract class View : MonoBehaviour
   {
-    public bool IsEcsActive { get; private set; }
-
-    private int _entity;
-    public int Entity
-    {
-      get => _entity;
-      set
-      {
-        IsEcsActive = true;
-        _entity= value;
-      }
-    }
+    public ObjectType Id;
+    public ICharacteristicList Chars;
   }
 }

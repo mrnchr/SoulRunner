@@ -1,4 +1,5 @@
-﻿using SoulRunner.Utility;
+﻿using SoulRunner.Infrastructure;
+using SoulRunner.Utility;
 
 namespace SoulRunner.Player
 {
@@ -6,7 +7,7 @@ namespace SoulRunner.Player
   {
     protected override void Awake()
     {
-      Owner = HeroType.Shon;
+      Owner = ObjectType.Shon;
       _actions
         .AddItem(new PlayerMoveAction(this))
         .AddItem(new ShonJumpAction(this))

@@ -13,12 +13,14 @@ namespace SoulRunner.Player
 
     public virtual void Crouch()
     {
+      if (!IsActive) return;
       _isCrouchCommand = true;
-      if (_variables.IsCrouching || _variables.IsJumping || _variables.IsClimbing || _variables.IsFalling) return;
+      if (!_variables.IsOnGround || _variables.IsCrouching || _variables.IsJumping || _variables.IsClimbing ||
+        _variables.IsFalling || _variables.IsDashing) return;
+      _view.Rb.velocity = Vector2.zero;
 
       _view.StayCollider.enabled = false;
       _view.CrouchCollider.enabled = true;
-      _view.Rb.velocity = Vector2.zero;
 
       _variables.IsCrouching = true;
       _variables.OnCrouchStart?.Invoke();
@@ -34,8 +36,10 @@ namespace SoulRunner.Player
 
     public virtual void Update()
     {
+      if (!IsActive) return;
       if (_variables.IsCrouching)
       {
+        _view.Rb.velocity = new Vector2(0, _view.Rb.velocity.y);
         if (!_isCrouchCommand)
           Stand();
 

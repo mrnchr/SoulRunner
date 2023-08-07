@@ -1,4 +1,5 @@
 ﻿using SoulRunner.Infrastructure.Actions;
+using UnityEngine;
 
 namespace SoulRunner.Player
 {
@@ -31,6 +32,7 @@ namespace SoulRunner.Player
         {
           _land.Land();
           AirJumpForcefully();
+          return;
         }
         else if (_variables.IsJumping)
         {
@@ -38,7 +40,7 @@ namespace SoulRunner.Player
           return;
         }
       }
-
+      
       base.Jump();
     }
 

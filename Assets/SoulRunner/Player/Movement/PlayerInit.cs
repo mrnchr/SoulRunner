@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SoulRunner.Infrastructure;
+using UnityEngine;
 
 namespace SoulRunner.Player
 {
@@ -8,9 +9,9 @@ namespace SoulRunner.Player
 
     private void Awake()
     {
-      HeroType startHero = _player.Chars.Hero.Current;
-      _player.ShonMesh.enabled = startHero == HeroType.Shon;
-      _player.KelliMesh.enabled = startHero == HeroType.Kelli;
+      ObjectType startHero = _player.Chars.Hero.Current;
+      _player.ShonMesh.enabled = startHero == ObjectType.Shon;
+      _player.KelliMesh.enabled = startHero == ObjectType.Kelli;
     }
 
     private void Reset()

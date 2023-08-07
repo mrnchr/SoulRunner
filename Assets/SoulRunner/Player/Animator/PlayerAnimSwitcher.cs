@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SoulRunner.Infrastructure;
+using UnityEngine;
 
 namespace SoulRunner.Player
 {
@@ -65,7 +66,7 @@ namespace SoulRunner.Player
     protected virtual void AnimateFall(bool isFall) 
     {
     }
-    protected virtual void AnimateSwap(HeroType _) 
+    protected virtual void AnimateSwap(ObjectType _) 
     {
     }
   }

@@ -4,7 +4,7 @@ using SoulRunner.Characteristics;
 namespace SoulRunner.Player
 {
   [Serializable]
-  public class JumpForceChar : Characteristic<float>
+  public class JumpForceChar : SimpleChar<float>
   {
   }
 }

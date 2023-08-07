@@ -13,12 +13,14 @@ namespace SoulRunner.Player
     public Rigidbody2D Rb;
     public GroundChecker GroundChecker;
     public LedgeChecker LedgeChecker;
-    
+
     public Collider2D StayCollider;
     public Collider2D CrouchCollider;
+    public Collider2D AttackCollider;
+    public Collider2D KelliAttackTrigger;
 
-    public PlayerChars Chars;
-    public PlayerSpec Spec;
+    public new PlayerChars Chars;
+    [HideInInspector] public PlayerSpec Spec;
     public PlayerActionVariables ActionVariables = new PlayerActionVariables();
 
     [Space, Header("Kelli")] 
@@ -46,12 +48,12 @@ namespace SoulRunner.Player
         _              => throw new ArgumentOutOfRangeException(nameof(hand), hand, null)
       };
 
-    public PlayerActionMachine GetActionMachine(HeroType hero) =>
+    public PlayerActionMachine GetActionMachine(ObjectType hero) =>
       hero switch
       {
-        HeroType.Kelli => KelliMachine,
-        HeroType.Shon  => ShonMachine,
-        _              => throw new ArgumentOutOfRangeException(nameof(hero), hero, null)
+        ObjectType.Kelli => KelliMachine,
+        ObjectType.Shon  => ShonMachine,
+        _                => throw new ArgumentOutOfRangeException(nameof(hero), hero, null)
       };
 
     [Inject]

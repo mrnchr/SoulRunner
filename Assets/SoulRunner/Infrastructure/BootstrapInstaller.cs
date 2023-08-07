@@ -14,6 +14,15 @@ namespace SoulRunner.Infrastructure
       BindTimerManager();
       BindConfigService();
       BindSpecService();
+      BindDamageService();
+    }
+
+    private void BindDamageService()
+    {
+      Container
+        .Bind<IDamageService>()
+        .To<DamageService>()
+        .AsSingle();
     }
 
     private void BindSpecService()
@@ -27,9 +36,9 @@ namespace SoulRunner.Infrastructure
     private void BindConfigService()
     {
       Container
-        .Bind<IConfigService>()
-        .To<ConfigService>()
-        .FromInstance(new ConfigService(_configList.Configs));
+        .Bind<IConfigurationService>()
+        .To<ConfigurationService>()
+        .FromInstance(new ConfigurationService(_configList.Configs));
     }
 
     private void BindTimerManager()

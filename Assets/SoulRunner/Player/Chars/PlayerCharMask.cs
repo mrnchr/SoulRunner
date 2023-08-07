@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SoulRunner.Characteristics;
+using SoulRunner.Infrastructure;
 
 namespace SoulRunner.Player
 {
   public class PlayerCharMask<TChar> : CharMask<TChar>
     where TChar : ICharacteristic
   {
-    public PlayerCharMask(IEnumerable<TChar> chars) : base(chars)
+    public PlayerCharMask(IEnumerable<ICharacteristic> chars) : base(chars)
     {
     }
 
@@ -18,9 +20,14 @@ namespace SoulRunner.Player
         if (Chars.Count == 1)
           return base.Char;
 
-        return _chars.OfType<HeroChar>().First().Current == HeroType.Kelli
-          ? With<IKelliChar>().Chars.First()
-          : With<IShonChar>().Chars.First();
+        ObjectType type = _chars.OfType<HeroChar>().Single();
+        foreach (TChar characteristic in Chars)
+        {
+          if (characteristic is not IHeroChar hero) continue;
+          if (hero.Owner == type) return characteristic;
+        }
+
+        throw new ArgumentNullException(nameof(TChar));
       }
     }
   }

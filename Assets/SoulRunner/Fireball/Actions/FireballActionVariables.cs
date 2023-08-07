@@ -9,6 +9,5 @@ namespace SoulRunner.Fireball
     public Action OnDeathStart;
     
     public bool IsDying;
-    public Timer BeforeDeath = 0;
   }
 }

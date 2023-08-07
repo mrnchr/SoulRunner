@@ -9,15 +9,16 @@ namespace SoulRunner.Fireball
   {
     public Rigidbody2D Rb;
     public FireballAnimator Anim;
-    public FireballConfig FireballCfg;
     public ObstacleChecker ObstacleChecker;
     public FireballActionMachine ActionMachine;
-    public FireballActionVariables ActionVariables;
+    public FireballActionVariables ActionVariables = new FireballActionVariables();
+    public WeaponCollider Weapon;
+    [HideInInspector] public FireballSpec Spec;
 
     [Inject]
-    public void Construct(IConfigService configSvc)
+    public void Construct(ISpecificationService specSvc)
     {
-      FireballCfg = configSvc.GetConfig<FireballConfig>();
+      Spec = specSvc.GetSpec<FireballSpec>();
     }
     
     private void Reset()

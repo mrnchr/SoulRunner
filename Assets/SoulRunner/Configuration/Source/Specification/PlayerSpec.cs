@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SoulRunner.Infrastructure;
+using UnityEngine;
 
 namespace SoulRunner.Configuration
 {
@@ -7,5 +8,7 @@ namespace SoulRunner.Configuration
   {
     public float BeforeFireTime;
     public float DashDuration;
+    public float SpeedWhenAttack;
+    public float KelliAttackDuration;
   }
 }

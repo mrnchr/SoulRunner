@@ -10,7 +10,7 @@ namespace SoulRunner.Player
     public Action OnGroundEnter;
     public Action OnGroundExit;
 
-    [FormerlySerializedAs("Ground")] public LayerMask GroundMask;
+    public LayerMask GroundMask;
 
     private bool _isOnGround;
     private bool _wasOnGround;
@@ -29,12 +29,12 @@ namespace SoulRunner.Player
       _isOnGround = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) => CheckOnGround(other.gameObject.layer);
-    private void OnTriggerStay2D(Collider2D other) => CheckOnGround(other.gameObject.layer);
+    private void OnTriggerEnter2D(Collider2D other) => CheckOnGround(other);
+    private void OnTriggerStay2D(Collider2D other) => CheckOnGround(other);
 
-    private void CheckOnGround(int layer)
+    private void CheckOnGround(Collider2D other)
     {
-      if (GroundMask.Contains(layer))
+      if (!other.isTrigger && GroundMask.Contains(other.gameObject.layer))
         _isOnGround = true;
     }
   }

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using SoulRunner.Control;
+using SoulRunner.Infrastructure;
 using SoulRunner.Infrastructure.Actions;
 using Zenject;
 
@@ -7,7 +8,7 @@ namespace SoulRunner.Player
 {
   public class PlayerActionMachine : ActionMachine<PlayerView>
   {
-    public HeroType Owner { get; protected set; }
+    public ObjectType Owner { get; protected set; }
     
     protected PlayerActionVariables _variables;
     protected PlayerChars _chars;
@@ -38,7 +39,7 @@ namespace SoulRunner.Player
       GetRawActions<ICycleAction>().ToList().ForEach(x => x.Deactivate());
     }
 
-    public virtual void ChangeActionActivity(HeroType hero)
+    public virtual void ChangeActionActivity(ObjectType hero)
     {
       if(hero == Owner)
         ActivateActions();

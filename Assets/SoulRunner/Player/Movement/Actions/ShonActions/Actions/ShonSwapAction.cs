@@ -15,9 +15,10 @@ namespace SoulRunner.Player
       
       _view.ShonMesh.enabled = false;
       _view.KelliMesh.enabled = true;
-      _chars.Hero.Current = HeroType.Kelli;
+      _chars.Hero.Current = ObjectType.Kelli;
       _variables.OnSwap?.Invoke(_chars.Hero);
-      TimerManager.AddTimer(_chars.SwapDelay.Current = _chars.SwapDelay.Max);
+      _chars.SwapDelay.ToDefault();
+      TimerManager.AddTimer(_chars.SwapDelay.Current);
     }
   }
 }

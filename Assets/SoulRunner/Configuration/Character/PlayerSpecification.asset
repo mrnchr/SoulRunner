@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BeforeFireTime: 0.3
   DashDuration: 0.5
+  SpeedWhenAttack: 10
+  KelliAttackDuration: 1.054

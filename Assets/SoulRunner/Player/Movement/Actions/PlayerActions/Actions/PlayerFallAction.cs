@@ -10,7 +10,7 @@ namespace SoulRunner.Player
 
     public virtual void Fall()
     {
-      if (_variables.IsJumping || _variables.IsOnGround || _variables.IsFalling) return;
+      if (!IsActive || _variables.IsOnGround || _variables.IsFalling) return;
       if (_view.Rb.velocity.y >= 0) return;
 
       FallForcefully();
@@ -18,6 +18,12 @@ namespace SoulRunner.Player
 
     public virtual void FallForcefully()
     {
+      if (_variables.IsJumping)
+      {
+        _variables.IsJumping = false;
+        _variables.OnJumpEnd?.Invoke();
+      }
+      
       _variables.IsFalling = true;
       _variables.OnFallStart?.Invoke();
     }

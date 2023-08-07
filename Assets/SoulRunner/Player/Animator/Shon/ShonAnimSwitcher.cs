@@ -1,4 +1,6 @@
-﻿namespace SoulRunner.Player
+﻿using SoulRunner.Infrastructure;
+
+namespace SoulRunner.Player
 {
   public class ShonAnimSwitcher : PlayerAnimSwitcher
   {
@@ -7,6 +9,6 @@
     protected override void AnimateCrouch(bool isCrouch) => _player.ShonAnim.IsCrouch = isCrouch;
     protected override void AnimateClimb(bool isClimb) => _player.ShonAnim.IsClimb = isClimb;
     protected override void AnimateFall(bool isFall) => _player.ShonAnim.IsFall = isFall;
-    protected override void AnimateSwap(HeroType _) => _player.ShonAnim.SwapTrigger = true;
+    protected override void AnimateSwap(ObjectType _) => _player.ShonAnim.SwapTrigger = true;
   }
 }

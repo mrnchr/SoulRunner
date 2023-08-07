@@ -14,7 +14,9 @@ namespace SoulRunner.Player
 
     public virtual void Jump()
     {
-      if (!_variables.IsOnGround || _variables.IsCrouching || _variables.IsClimbing || _variables.IsFalling) return;
+      if (!IsActive) return;
+      if (!_variables.IsOnGround || _variables.IsJumping || _variables.IsCrouching || _variables.IsClimbing ||
+        _variables.IsFalling || _variables.IsDashing) return;
       
       JumpForcefully();
     }
@@ -24,7 +26,6 @@ namespace SoulRunner.Player
       _rb.velocity = new Vector2(_rb.velocity.x, 0);
       _rb.AddForce(Vector2.up * _chars.JumpForce, ForceMode2D.Impulse);
 
-      _variables.IsOnGround = false;
       _variables.IsJumping = true;
       
       _variables.OnJumpStart?.Invoke();

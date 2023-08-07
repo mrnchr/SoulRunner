@@ -1,4 +1,4 @@
-﻿using SoulRunner.Player;
+﻿using SoulRunner.Infrastructure;
 using UnityEngine;
 
 namespace SoulRunner.Configuration
@@ -7,16 +7,23 @@ namespace SoulRunner.Configuration
   public class PlayerConfig : Config
   {
     [Header("General")]
+    public float Health;
+    public float BaseDamage;
+    public float BaseAttackRatio;
     public float MoveSpeed;
     public float JumpForce;
     public float SwapDelay;
-    public HeroType StartHero;
+    public ObjectType StartHero;
     
     [Header("Kelli")]
     public float FireDelay;
-    public float BeforeFireTime;
+    public float FireballSpeed;
     public float DashSpeed;
-    public float DashDuration;
     public float DashDelay;
+    public float KelliAttackDelay;
+    public float KelliAttackRatio;
+
+    [Header("Shon")]
+    public float ShonAttackRatio;
   }
 }

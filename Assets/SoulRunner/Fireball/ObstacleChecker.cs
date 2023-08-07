@@ -10,9 +10,9 @@ namespace SoulRunner.Fireball
 
     public LayerMask ObstacleMask;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-      if (ObstacleMask.Contains(other.gameObject.layer))
+      if (!collision.otherCollider.isTrigger && ObstacleMask.Contains(collision.gameObject.layer))
       {
         OnCollided?.Invoke();
       }

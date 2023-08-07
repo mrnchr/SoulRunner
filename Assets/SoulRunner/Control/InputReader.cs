@@ -1,7 +1,6 @@
 ﻿using System;
 using Rewired;
 using SoulRunner.Utility;
-using UnityEngine;
 using Zenject;
 
 namespace SoulRunner.Control
@@ -17,12 +16,14 @@ namespace SoulRunner.Control
     public Action OnFireLeft;
     public Action OnFireRight;
     public Action OnMainAbility;
-    public Action OnDash;
+    public Action OnSideAbility;
     public Action OnSwapHero;
     public Action OnPickUp;
     public Action OnUse;
     public Action OnPrevItem;
     public Action OnNextItem;
+
+    public InputValues Values;
 
     private Rewired.Player _player;
 
@@ -33,33 +34,42 @@ namespace SoulRunner.Control
 
     public void Tick()
     {
-      OnMove?.Invoke(_player.GetAxis(Idents.InputActions.Horizontal));
-      ReadButtonDown(Idents.InputActions.Up, OnJump);
-      ReadButton(Idents.InputActions.Down, OnCrouch);
-      ReadButtonDown(Idents.InputActions.Up, OnClimbUp);
-      ReadButtonDown(Idents.InputActions.Down, OnClimbDown);
-      ReadButtonDown(Idents.InputActions.Up, OnGrab);
-      ReadButton(Idents.InputActions.FireLeft, OnFireLeft);
-      ReadButton(Idents.InputActions.FireRight, OnFireRight);
-      ReadButton(Idents.InputActions.MainAbility, OnMainAbility);
-      ReadButton(Idents.InputActions.SideAbility, OnDash);
-      ReadButtonDown(Idents.InputActions.SwapHero, OnSwapHero);
-      ReadButton(Idents.InputActions.PickUp, OnPickUp);
-      ReadButton(Idents.InputActions.UseItem, OnUse);
-      ReadButton(Idents.InputActions.NextItem, OnNextItem);
-      ReadButton(Idents.InputActions.PrevItem, OnPrevItem);
+      float moveAxis = _player.GetAxis(Idents.InputActions.Horizontal);
+      OnMove?.Invoke(moveAxis);
+      Values.MoveDirection = moveAxis;
+      
+      ReadButtonDown(Idents.InputActions.Up, OnJump, ref Values.JumpButton);
+      ReadButton(Idents.InputActions.Down, OnCrouch, ref Values.CrouchButton);
+      ReadButtonDown(Idents.InputActions.Up, OnClimbUp, ref Values.ClimbUpButton);
+      ReadButtonDown(Idents.InputActions.Down, OnClimbDown, ref Values.ClimbDownButton);
+      ReadButtonDown(Idents.InputActions.Up, OnGrab, ref Values.GrabButton);
+      ReadButton(Idents.InputActions.FireLeft, OnFireLeft, ref Values.FireLeftButton);
+      ReadButton(Idents.InputActions.FireRight, OnFireRight, ref Values.FireRightButton);
+      ReadButton(Idents.InputActions.MainAbility, OnMainAbility, ref Values.MainAbilityButton);
+      ReadButtonDown(Idents.InputActions.SideAbility, OnSideAbility, ref Values.SideAbilityButton);
+      ReadButtonDown(Idents.InputActions.SwapHero, OnSwapHero, ref Values.SwapHeroButton);
+      ReadButton(Idents.InputActions.PickUp, OnPickUp, ref Values.PickUpButton);
+      ReadButton(Idents.InputActions.UseItem, OnUse, ref Values.UseItemButton);
+      ReadButton(Idents.InputActions.NextItem, OnNextItem, ref Values.NextItemButton);
+      ReadButton(Idents.InputActions.PrevItem, OnPrevItem, ref Values.PrevItemButton);
     }
 
-    private void ReadButton(string inputAction, Action action)
+    private void ReadButton(string inputAction, Action action, ref bool button)
     {
-      if (_player.GetButton(inputAction))
+      button = _player.GetButton(inputAction);
+      if (button)
+      {
         action?.Invoke();
+      }
     }
 
-    private void ReadButtonDown(string inputAction, Action action)
+    private void ReadButtonDown(string inputAction, Action action, ref bool button)
     {
-      if (_player.GetButtonDown(inputAction))
+      button = _player.GetButtonDown(inputAction);
+      if (button)
+      {
         action?.Invoke();
+      }
     }
   }
 }

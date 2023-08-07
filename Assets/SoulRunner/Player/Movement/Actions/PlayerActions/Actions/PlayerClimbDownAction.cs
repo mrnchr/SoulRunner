@@ -17,7 +17,7 @@ namespace SoulRunner.Player
 
     public virtual void ClimbDown()
     {
-      if (!_variables.IsClimbing) return;
+      if (!IsActive || !_variables.IsClimbing) return;
       
       _view.Rb.gravityScale = 1;
         

@@ -15,7 +15,7 @@ namespace SoulRunner.Player
     
     public virtual void Move(float direction)
     {
-      if (_variables.IsCrouching || _variables.IsDashing || _variables.IsClimbing) return;
+      if (!IsActive || _variables.IsCrouching || _variables.IsDashing || _variables.IsClimbing) return;
       
       _view.transform.localScale = SetViewDirection(_view.transform.localScale, direction);
       _rb.velocity = new Vector2(_chars.MoveSpeed * direction, _rb.velocity.y);
