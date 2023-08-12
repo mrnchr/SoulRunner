@@ -14,6 +14,6 @@ namespace SoulRunner.Infrastructure
 
     public TSpec GetSpec<TSpec>()
     where TSpec : ISpec =>
-      _specs.OfType<TSpec>().First();
+      _specs.OfType<TSpec>().Single();
   }
 }

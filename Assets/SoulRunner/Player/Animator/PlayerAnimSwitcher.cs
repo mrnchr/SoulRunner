@@ -6,11 +6,11 @@ namespace SoulRunner.Player
   public class PlayerAnimSwitcher : MonoBehaviour
   {
     [SerializeField] protected PlayerView _player;
-    protected PlayerActionVariables _variables;
+    protected PlayerStateVariables _variables;
 
     private void Awake()
     {
-      _variables = _player.ActionVariables;
+      _variables = _player.StateVariables;
     }
 
     private void OnEnable()

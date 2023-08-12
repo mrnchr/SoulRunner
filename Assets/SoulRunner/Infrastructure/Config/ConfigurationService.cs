@@ -15,6 +15,6 @@ namespace SoulRunner.Infrastructure
     
     public TConfig GetConfig<TConfig>()
     where TConfig : IConfig =>
-      _configs.OfType<TConfig>().First();
+      _configs.OfType<TConfig>().Single();
   }
 }

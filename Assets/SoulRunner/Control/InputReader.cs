@@ -23,6 +23,7 @@ namespace SoulRunner.Control
     public Action OnPrevItem;
     public Action OnNextItem;
 
+    public Action<InputValues> OnInputRead;
     public InputValues Values;
 
     private Rewired.Player _player;
@@ -52,6 +53,8 @@ namespace SoulRunner.Control
       ReadButton(Idents.InputActions.UseItem, OnUse, ref Values.UseItemButton);
       ReadButton(Idents.InputActions.NextItem, OnNextItem, ref Values.NextItemButton);
       ReadButton(Idents.InputActions.PrevItem, OnPrevItem, ref Values.PrevItemButton);
+
+      OnInputRead?.Invoke(Values);
     }
 
     private void ReadButton(string inputAction, Action action, ref bool button)

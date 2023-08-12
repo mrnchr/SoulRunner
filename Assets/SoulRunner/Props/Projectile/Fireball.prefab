@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2193438858658110740}
   - component: {fileID: 2193438858658110743}
   - component: {fileID: 1589592944653372640}
-  - component: {fileID: 4003845000925201557}
+  - component: {fileID: 388503391771875296}
   - component: {fileID: 2577031679676645105}
   - component: {fileID: 8432049811608496233}
   - component: {fileID: -2855665856092347954}
@@ -143,14 +143,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 101
   Rb: {fileID: -2855665856092347954}
-  Anim: {fileID: 8432049811608496233}
-  ObstacleChecker: {fileID: 6551435864421378812}
-  ActionMachine: {fileID: 4003845000925201557}
   ActionVariables:
     IsDying: 0
+    IsCollided: 0
   Weapon: {fileID: 427447918283488735}
   Spec: {fileID: 0}
---- !u!114 &4003845000925201557
+--- !u!114 &388503391771875296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,10 +157,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2193438858658110742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f98c077c91141caa778b67ce450265c, type: 3}
+  m_Script: {fileID: 11500000, guid: c20c4cb9922b4ebca1ae8825dc9a879a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   View: {fileID: 1589592944653372640}
+  _oldState: 0
+  _currentState: 0
+  Variables:
+    IsDying: 0
+    IsCollided: 0
+  Obstacle: {fileID: 6551435864421378812}
 --- !u!114 &2577031679676645105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 1589592944653372640}
+  _animator: {fileID: 8432049811608496233}
 --- !u!114 &8432049811608496233
 MonoBehaviour:
   m_ObjectHideFlags: 0

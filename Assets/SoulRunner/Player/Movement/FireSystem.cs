@@ -1,6 +1,5 @@
 ﻿using SoulRunner.Fireball;
 using SoulRunner.Infrastructure;
-using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -33,12 +32,12 @@ namespace SoulRunner.Player
 
     private void OnEnable()
     {
-      _player.ActionVariables.OnFire += CastFireball;
+      _player.StateVariables.OnFire += CastFireball;
     }
 
     private void OnDisable()
     {
-      _player.ActionVariables.OnFire -= CastFireball;
+      _player.StateVariables.OnFire -= CastFireball;
     }
   }
 }

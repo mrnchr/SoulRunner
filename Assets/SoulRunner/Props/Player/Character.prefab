@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 345630074198989056}
   - component: {fileID: 345630074198989071}
   - component: {fileID: 345630074198989070}
-  - component: {fileID: 1229266092016247682}
+  - component: {fileID: 8602354289775517857}
   - component: {fileID: 2965496116829849784}
   - component: {fileID: 3917108327511158151}
   m_Layer: 6
@@ -172,7 +172,7 @@ MonoBehaviour:
   _animationName: 
   loop: 0
   timeScale: 1.4
---- !u!114 &1229266092016247682
+--- !u!114 &8602354289775517857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,10 +181,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 345630074198989068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3f7ec7e8ccf4a64967f4abdab3f7d24, type: 3}
+  m_Script: {fileID: 11500000, guid: 75e921d716ac4dfdb84c388c8dc4c416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   View: {fileID: 345630075180562087}
+  IsActive: 0
+  Owner: 0
+  Variables:
+    IsOnGround: 0
+    IsOnGroundEnter: 0
+    IsOnGroundExit: 0
+    IsOnLedge: 0
+    LedgePosX: 0
+    IsJumping: 0
+    IsCrouching: 0
+    IsFiring: 0
+    IsClimbing: 0
+    IsFalling: 0
+    IsDashing: 0
+    IsAttackInJump: 0
+    IsAttacking: 0
+    NextHand: 0
+    CanAirJump: 0
 --- !u!114 &2965496116829849784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +525,8 @@ MonoBehaviour:
   Spec: {fileID: 0}
   ActionVariables:
     IsOnGround: 0
+    IsOnGroundEnter: 0
+    IsOnGroundExit: 0
     IsOnLedge: 0
     LedgePosX: 0
     IsJumping: 0
@@ -519,7 +539,7 @@ MonoBehaviour:
     IsAttacking: 0
     NextHand: 0
     CanAirJump: 0
-  KelliMachine: {fileID: 4690008499667833845}
+  KelliMachine: {fileID: 8735273355645288412}
   KelliMesh: {fileID: 345630075404894839}
   KelliAnim: {fileID: 6117525143276216724}
   RightHand: {fileID: 345630075695392324}
@@ -530,7 +550,7 @@ MonoBehaviour:
   DashLayer:
     serializedVersion: 2
     m_Bits: 1024
-  ShonMachine: {fileID: 1229266092016247682}
+  ShonMachine: {fileID: 8602354289775517857}
   ShonMesh: {fileID: 345630074198989071}
   ShonAnim: {fileID: 2965496116829849784}
 --- !u!114 &7556593061551240022
@@ -656,7 +676,7 @@ GameObject:
   - component: {fileID: 345630075404894856}
   - component: {fileID: 345630075404894839}
   - component: {fileID: 345630075404894838}
-  - component: {fileID: 4690008499667833845}
+  - component: {fileID: 8735273355645288412}
   - component: {fileID: 6117525143276216724}
   - component: {fileID: 4111898744228352664}
   - component: {fileID: 6987011477031580810}
@@ -769,7 +789,7 @@ MonoBehaviour:
   _animationName: jump_attack/fly_idle
   loop: 0
   timeScale: 1.4
---- !u!114 &4690008499667833845
+--- !u!114 &8735273355645288412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -778,10 +798,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 345630075404894837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f360a88facb49ab86122a69ceec2c4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a587e0609cf42b292935081646dd0cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   View: {fileID: 345630075180562087}
+  IsActive: 0
+  Owner: 0
+  Variables:
+    IsOnGround: 0
+    IsOnGroundEnter: 0
+    IsOnGroundExit: 0
+    IsOnLedge: 0
+    LedgePosX: 0
+    IsJumping: 0
+    IsCrouching: 0
+    IsFiring: 0
+    IsClimbing: 0
+    IsFalling: 0
+    IsDashing: 0
+    IsAttackInJump: 0
+    IsAttacking: 0
+    NextHand: 0
+    CanAirJump: 0
 --- !u!114 &6117525143276216724
 MonoBehaviour:
   m_ObjectHideFlags: 0

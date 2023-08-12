@@ -11,7 +11,7 @@ namespace SoulRunner.Player
     public Action<float> OnLedgeEnter;
     public Action OnLedgeExit;
 
-    [FormerlySerializedAs("Ledge")] public LayerMask LedgeMask;
+    public LayerMask LedgeMask;
 
     private Collider2D _ledge;
     private bool _isOnLedge;

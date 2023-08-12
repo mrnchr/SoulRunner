@@ -1,8 +1,7 @@
 ﻿using SoulRunner.Infrastructure;
-using SoulRunner.Player;
 using UnityEngine;
 
-namespace SoulRunner.DamageManagement
+namespace SoulRunner.Player
 {
   public class PlayerAttackSystem : AttackSystem
   {

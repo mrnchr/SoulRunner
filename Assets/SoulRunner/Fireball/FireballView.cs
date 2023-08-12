@@ -8,10 +8,7 @@ namespace SoulRunner.Fireball
   public class FireballView : View
   {
     public Rigidbody2D Rb;
-    public FireballAnimator Anim;
-    public ObstacleChecker ObstacleChecker;
-    public FireballActionMachine ActionMachine;
-    public FireballActionVariables ActionVariables = new FireballActionVariables();
+    public FireballStateVariables StateVariables = new FireballStateVariables();
     public WeaponCollider Weapon;
     [HideInInspector] public FireballSpec Spec;
 
@@ -24,7 +21,6 @@ namespace SoulRunner.Fireball
     private void Reset()
     {
       TryGetComponent(out Rb);
-      TryGetComponent(out Anim);
     }
   }
 }

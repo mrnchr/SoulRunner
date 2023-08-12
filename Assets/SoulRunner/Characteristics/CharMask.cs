@@ -9,7 +9,7 @@ namespace SoulRunner.Characteristics
     protected IEnumerable<ICharacteristic> _chars;
     protected IEnumerable<TChar> _selected;
     
-    public virtual TChar Char => Chars.First();
+    public virtual TChar Char => Chars.Single();
     public virtual List<TChar> Chars => new List<TChar>(_selected);
 
     public CharMask(IEnumerable<ICharacteristic> chars)

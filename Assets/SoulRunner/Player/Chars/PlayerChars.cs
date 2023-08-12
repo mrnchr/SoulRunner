@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using SoulRunner.Characteristics;
 using SoulRunner.Configuration;
 using SoulRunner.Infrastructure;
 using SoulRunner.Utility;
-using Zenject;
 
 namespace SoulRunner.Player
 {

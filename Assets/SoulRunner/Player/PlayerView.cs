@@ -3,13 +3,14 @@ using SoulRunner.Configuration;
 using SoulRunner.Infrastructure;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace SoulRunner.Player
 {
   public class PlayerView : View
   {
-    public PlayerActionMachine ActiveActionMachine => GetActionMachine(Chars.Hero.Current);
+    public PlayerStateMachine ActiveMachine => GetMachine(Chars.Hero.Current);
     public Rigidbody2D Rb;
     public GroundChecker GroundChecker;
     public LedgeChecker LedgeChecker;
@@ -21,10 +22,10 @@ namespace SoulRunner.Player
 
     public new PlayerChars Chars;
     [HideInInspector] public PlayerSpec Spec;
-    public PlayerActionVariables ActionVariables = new PlayerActionVariables();
+    public PlayerStateVariables StateVariables = new PlayerStateVariables();
 
     [Space, Header("Kelli")] 
-    public KelliActionMachine KelliMachine;
+    public KelliStateMachine KelliMachine;
     public MeshRenderer KelliMesh;
     public KelliAnimator KelliAnim;
     
@@ -35,7 +36,7 @@ namespace SoulRunner.Player
     public LayerMask DashLayer;
 
     [Space, Header("Shon")] 
-    public ShonActionMachine ShonMachine;
+    public ShonStateMachine ShonMachine;
     public MeshRenderer ShonMesh;
     public ShonAnimator ShonAnim;
 
@@ -48,7 +49,7 @@ namespace SoulRunner.Player
         _              => throw new ArgumentOutOfRangeException(nameof(hand), hand, null)
       };
 
-    public PlayerActionMachine GetActionMachine(ObjectType hero) =>
+    public PlayerStateMachine GetMachine(ObjectType hero) =>
       hero switch
       {
         ObjectType.Kelli => KelliMachine,

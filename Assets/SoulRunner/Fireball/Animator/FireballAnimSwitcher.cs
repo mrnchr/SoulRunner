@@ -5,13 +5,12 @@ namespace SoulRunner.Fireball
   public class FireballAnimSwitcher : MonoBehaviour
   {
     [SerializeField] private FireballView _view;
-    private FireballAnimator _animator;
-    private FireballActionVariables _variables;
+    [SerializeField] private FireballAnimator _animator;
+    private FireballStateVariables _variables;
 
     private void Awake()
     {
-      _animator = _view.Anim;
-      _variables = _view.ActionVariables;
+      _variables = _view.StateVariables;
     }
 
     public void OnEnable()

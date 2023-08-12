@@ -65,7 +65,7 @@ namespace SoulRunner.Infrastructure.Spine
     public SpineAnimatorLayer<TEnum> GetLayer(int index) => _layers[index];
 
     public SpineAnimationState<TEnum> GetState(TEnum type) =>
-      _states.First(x => x.Animation.Name.Equals(type));
+      _states.Single(x => x.Animation.Name.Equals(type));
 
     public void SetVariable<T>(T value, ref T variable)
     {
