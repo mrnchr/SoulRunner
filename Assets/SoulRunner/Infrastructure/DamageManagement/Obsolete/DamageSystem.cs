@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using SoulRunner.DamageManagement;
 
 namespace SoulRunner.Infrastructure
 {

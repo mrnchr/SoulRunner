@@ -7,7 +7,7 @@ namespace SoulRunner.Infrastructure.Spine
     where TEnum : Enum
   {
     public readonly List<SpineAnimationTransition<TEnum>> Transitions;
-    public ConfigurableSpineAnimation<TEnum> Animation;
+    public readonly ConfigurableSpineAnimation<TEnum> Animation;
 
     public SpineAnimationState(ConfigurableSpineAnimation<TEnum> animation)
     {

@@ -10,9 +10,7 @@ namespace SoulRunner.Infrastructure
     private void OnCollisionEnter2D(Collision2D other)
     {
       if (!other.otherCollider.isTrigger && other.gameObject.TryGetComponent(out AttackSystem attackSys))
-      {
         attackSys.TakeDamage(Owner, AttackPoints);
-      }
     }
   }
 }

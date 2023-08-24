@@ -2,11 +2,6 @@
 {
   public static class Idents
   {
-    public static class EcsWorlds
-    {
-      public static string message = "message";
-    }
-
     public static class InputActions
     {
       public const string Horizontal = nameof(Horizontal);

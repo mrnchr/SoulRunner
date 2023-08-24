@@ -15,4 +15,4 @@ MonoBehaviour:
   BeforeFireTime: 0.3
   DashDuration: 0.5
   SpeedWhenAttack: 10
-  KelliAttackDuration: 1.054
+  KelliAttackDuration: 0.8

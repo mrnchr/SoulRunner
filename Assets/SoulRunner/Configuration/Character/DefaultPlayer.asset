@@ -15,6 +15,10 @@ MonoBehaviour:
   Health: 100
   BaseDamage: 10
   BaseAttackRatio: 1
+  Energy: 100
+  BaseEnergyRatio: 1
+  EnergyResetRatio: 1
+  EnergyResetSpeed: 5
   MoveSpeed: 7
   JumpForce: 25
   SwapDelay: 0.5
@@ -25,4 +29,6 @@ MonoBehaviour:
   DashDelay: 1
   KelliAttackDelay: 3
   KelliAttackRatio: 1
+  KelliEnergyCost: 10
   ShonAttackRatio: 1.5
+  ShonEnergyCost: 10

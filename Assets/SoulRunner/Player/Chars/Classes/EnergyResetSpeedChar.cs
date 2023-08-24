@@ -4,7 +4,8 @@ using SoulRunner.Characteristics;
 namespace SoulRunner.Player
 {
   [Serializable]
-  public class EnergyChar : ContinuousComplexChar<float>
+  public class EnergyResetSpeedChar : SimpleChar<float> 
   {
+    
   }
 }

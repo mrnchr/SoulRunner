@@ -6,7 +6,7 @@ namespace SoulRunner.Infrastructure
 {
   public class ConfigurationService : IConfigurationService
   {
-    private List<Config> _configs;
+    private readonly List<Config> _configs;
 
     public ConfigurationService(List<Config> configs)
     {

@@ -30,9 +30,9 @@ namespace SoulRunner.Player
         StopFiring();
         return;
       }
-
+      
       bool fire = inputs.FireLeftButton || inputs.FireRightButton;
-      if (!fire || View.Chars.FireDelay.Current > 0 ||
+      if (!fire || View.Chars.FireDelay.Current > 0 || View.Chars.Energy < View.Chars.GetEnergyCost() ||
         Machine.CurrentState is MainAbility or SuperAttack or SideAbility) return;
 
       if (Machine.CurrentState == Climb)
@@ -69,11 +69,9 @@ namespace SoulRunner.Player
 
     private void StopFiring()
     {
-      if (_isFiring)
-      {
-        Variables.IsFiring = false;
-        TimerManager.RemoveTimer(_beforeFire);
-      }
+      if (!_isFiring) return;
+      Variables.IsFiring = false;
+      TimerManager.RemoveTimer(_beforeFire);
     }
 
     private HandType GetNextHand(HandType hand) =>

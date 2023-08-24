@@ -39,40 +39,36 @@ namespace SoulRunner.Control
       OnMove?.Invoke(moveAxis);
       Values.MoveDirection = moveAxis;
       
-      ReadButtonDown(Idents.InputActions.Up, OnJump, ref Values.JumpButton);
-      ReadButton(Idents.InputActions.Down, OnCrouch, ref Values.CrouchButton);
-      ReadButtonDown(Idents.InputActions.Up, OnClimbUp, ref Values.ClimbUpButton);
-      ReadButtonDown(Idents.InputActions.Down, OnClimbDown, ref Values.ClimbDownButton);
-      ReadButtonDown(Idents.InputActions.Up, OnGrab, ref Values.GrabButton);
-      ReadButton(Idents.InputActions.FireLeft, OnFireLeft, ref Values.FireLeftButton);
-      ReadButton(Idents.InputActions.FireRight, OnFireRight, ref Values.FireRightButton);
-      ReadButton(Idents.InputActions.MainAbility, OnMainAbility, ref Values.MainAbilityButton);
-      ReadButtonDown(Idents.InputActions.SideAbility, OnSideAbility, ref Values.SideAbilityButton);
-      ReadButtonDown(Idents.InputActions.SwapHero, OnSwapHero, ref Values.SwapHeroButton);
-      ReadButton(Idents.InputActions.PickUp, OnPickUp, ref Values.PickUpButton);
-      ReadButton(Idents.InputActions.UseItem, OnUse, ref Values.UseItemButton);
-      ReadButton(Idents.InputActions.NextItem, OnNextItem, ref Values.NextItemButton);
-      ReadButton(Idents.InputActions.PrevItem, OnPrevItem, ref Values.PrevItemButton);
+      ReadButtonDown(Idents.InputActions.Up, OnJump, out Values.JumpButton);
+      ReadButton(Idents.InputActions.Down, OnCrouch, out Values.CrouchButton);
+      ReadButtonDown(Idents.InputActions.Up, OnClimbUp, out Values.ClimbUpButton);
+      ReadButtonDown(Idents.InputActions.Down, OnClimbDown, out Values.ClimbDownButton);
+      ReadButtonDown(Idents.InputActions.Up, OnGrab, out Values.GrabButton);
+      ReadButton(Idents.InputActions.FireLeft, OnFireLeft, out Values.FireLeftButton);
+      ReadButton(Idents.InputActions.FireRight, OnFireRight, out Values.FireRightButton);
+      ReadButton(Idents.InputActions.MainAbility, OnMainAbility, out Values.MainAbilityButton);
+      ReadButtonDown(Idents.InputActions.SideAbility, OnSideAbility, out Values.SideAbilityButton);
+      ReadButtonDown(Idents.InputActions.SwapHero, OnSwapHero, out Values.SwapHeroButton);
+      ReadButton(Idents.InputActions.PickUp, OnPickUp, out Values.PickUpButton);
+      ReadButton(Idents.InputActions.UseItem, OnUse, out Values.UseItemButton);
+      ReadButton(Idents.InputActions.NextItem, OnNextItem, out Values.NextItemButton);
+      ReadButton(Idents.InputActions.PrevItem, OnPrevItem, out Values.PrevItemButton);
 
       OnInputRead?.Invoke(Values);
     }
 
-    private void ReadButton(string inputAction, Action action, ref bool button)
+    private void ReadButton(string inputAction, Action action, out bool button)
     {
       button = _player.GetButton(inputAction);
       if (button)
-      {
         action?.Invoke();
-      }
     }
 
-    private void ReadButtonDown(string inputAction, Action action, ref bool button)
+    private void ReadButtonDown(string inputAction, Action action, out bool button)
     {
       button = _player.GetButtonDown(inputAction);
       if (button)
-      {
         action?.Invoke();
-      }
     }
   }
 }

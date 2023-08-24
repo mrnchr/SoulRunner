@@ -1,4 +1,5 @@
 ﻿using SoulRunner.Characteristics;
+using SoulRunner.Configuration;
 using SoulRunner.Player;
 using SoulRunner.Utility;
 

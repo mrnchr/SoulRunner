@@ -185,6 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   View: {fileID: 345630075180562087}
+  _oldState: 0
+  _currentState: 0
   IsActive: 0
   Owner: 0
   Variables:
@@ -202,6 +204,8 @@ MonoBehaviour:
     IsAttackInJump: 0
     IsAttacking: 0
     NextHand: 0
+    DashHold:
+      _timeLeft: 0
     CanAirJump: 0
 --- !u!114 &2965496116829849784
 MonoBehaviour:
@@ -433,6 +437,7 @@ GameObject:
   - component: {fileID: 7556593061551240022}
   - component: {fileID: 694927375609592204}
   - component: {fileID: 5268065323976730152}
+  - component: {fileID: 2878182485328818221}
   - component: {fileID: 2328029380596182816}
   - component: {fileID: 1665665546228083037}
   m_Layer: 6
@@ -523,7 +528,7 @@ MonoBehaviour:
   KelliAttackTrigger: {fileID: 2104891939743877936}
   Chars: {fileID: 7556593061551240022}
   Spec: {fileID: 0}
-  ActionVariables:
+  StateVariables:
     IsOnGround: 0
     IsOnGroundEnter: 0
     IsOnGroundExit: 0
@@ -538,6 +543,8 @@ MonoBehaviour:
     IsAttackInJump: 0
     IsAttacking: 0
     NextHand: 0
+    DashHold:
+      _timeLeft: 0
     CanAirJump: 0
   KelliMachine: {fileID: 8735273355645288412}
   KelliMesh: {fileID: 345630075404894839}
@@ -573,6 +580,26 @@ MonoBehaviour:
     _default: 0
     Min: 0
     _max: 0
+  KelliAttackRatio:
+    _current: 0
+    _default: 0
+  ShonAttackRatio:
+    _current: 0
+    _default: 0
+  Energy:
+    _current: 0
+    _default: 0
+    Min: 0
+    _max: 0
+  BaseEnergyRatio:
+    _current: 0
+    _default: 0
+  KelliEnergyCost:
+    _current: 0
+    _default: 0
+  ShonEnergyCost:
+    _current: 0
+    _default: 0
   MoveSpeed:
     _current: 0
     _default: 0
@@ -631,6 +658,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 345630075180562087}
+  _chars: {fileID: 7556593061551240022}
+--- !u!114 &2878182485328818221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345630075180562081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3069d7cbe374bf48d2e5bd8a83c8691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _chars: {fileID: 7556593061551240022}
 --- !u!70 &2328029380596182816
 CapsuleCollider2D:
@@ -802,6 +842,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   View: {fileID: 345630075180562087}
+  _oldState: 0
+  _currentState: 0
   IsActive: 0
   Owner: 0
   Variables:
@@ -819,6 +861,8 @@ MonoBehaviour:
     IsAttackInJump: 0
     IsAttacking: 0
     NextHand: 0
+    DashHold:
+      _timeLeft: 0
     CanAirJump: 0
 --- !u!114 &6117525143276216724
 MonoBehaviour:
@@ -873,6 +917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 345630075180562087}
   _attackSys: {fileID: 5268065323976730152}
+  _chars: {fileID: 7556593061551240022}
 --- !u!1 &345630075695392323
 GameObject:
   m_ObjectHideFlags: 0

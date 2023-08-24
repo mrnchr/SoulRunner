@@ -1,6 +1,4 @@
-﻿using SoulRunner.DamageManagement;
-using SoulRunner.Infrastructure;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace SoulRunner.Infrastructure
@@ -18,14 +16,5 @@ namespace SoulRunner.Infrastructure
     public abstract float GetDamagePoints();
     public abstract float TakeDamage(View damaging, float damagePoints);
     
-  }
-}
-
-namespace SoulRunner.DamageManagement
-{
-  public interface IAttackSystem
-  {
-    public float GetDamagePoints();
-    public float TakeDamage(View damaging, float damagePoints);
   }
 }

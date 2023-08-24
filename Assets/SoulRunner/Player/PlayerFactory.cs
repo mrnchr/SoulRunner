@@ -21,8 +21,7 @@ namespace SoulRunner.Player
 
     public PlayerView Create(Vector3 at)
     {
-      var player = _container
-        .InstantiatePrefabForComponent<PlayerView>(_prefab, at, Quaternion.identity, null);
+      var player = _container.InstantiatePrefabForComponent<PlayerView>(_prefab, at, Quaternion.identity, null);
       OnPlayerCreated(player);
       return player;
     }

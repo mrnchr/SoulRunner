@@ -30,11 +30,8 @@ namespace SoulRunner.Characteristics
     protected override void Calculate()
     {
       var max = new Timer { TimeLeft = Default };
-      
       foreach (CalculateHandler calculation in _calculations)
-      {
         max = calculation(this, ref max);
-      }
       Max.TimeLeft = max;
     }
 

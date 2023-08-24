@@ -9,6 +9,7 @@ namespace SoulRunner.Player
   {
     [SerializeField] private PlayerView _player;
     [SerializeField] private AttackSystem _attackSys;
+    [SerializeField] private PlayerChars _chars;
     private IFireballFactory _fireballFactory;
 
     [Inject]
@@ -25,9 +26,11 @@ namespace SoulRunner.Player
       
       FireballView fireballView = _fireballFactory.Create(handPos);
       fireballView.transform.localScale = new Vector3(direction, 1, 1);
-      fireballView.Rb.velocity = Vector2.right * (direction * _player.Chars.FireballSpeed);
+      fireballView.Rb.velocity = Vector2.right * (direction * _chars.FireballSpeed);
       fireballView.Weapon.Owner = _player;
       fireballView.Weapon.AttackPoints = _attackSys.GetDamagePoints();
+
+      _chars.Energy.Current -= _chars.BaseEnergyRatio * _chars.GetChars<HeroEnergyCostChar>().Char;
     }
 
     private void OnEnable()

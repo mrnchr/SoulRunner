@@ -46,9 +46,7 @@ namespace SoulRunner.Characteristics
     {
       T max = Default;
       foreach (CalculateHandler calculation in _calculations)
-      {
         max = calculation(this, ref max);
-      }
       Max = max;
     }
 

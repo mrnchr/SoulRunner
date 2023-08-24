@@ -20,7 +20,7 @@ namespace SoulRunner.Player
     public Collider2D AttackCollider;
     public Collider2D KelliAttackTrigger;
 
-    public new PlayerChars Chars;
+    public PlayerChars Chars;
     [HideInInspector] public PlayerSpec Spec;
     public PlayerStateVariables StateVariables = new PlayerStateVariables();
 

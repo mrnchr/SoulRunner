@@ -5,7 +5,7 @@ namespace SoulRunner.Infrastructure
 {
   public class SpecificationService : ISpecificationService
   {
-    private List<Specification> _specs;
+    private readonly List<Specification> _specs;
 
     public SpecificationService(List<Specification> specs)
     {
